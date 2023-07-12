@@ -1,9 +1,8 @@
-// import styled from "styled-components";
+import styled from "styled-components";
 
-// export const LoginContainer = styled.div`
-//     height: 100vh;
-//     max-width: 1280px;
-
-//     display: grid;
-//     place-items: center
-// `
+export const LoginContainer = styled.div`
+    display: grid;
+    width: 100%;
+    height: 100px;
+    place-items: center;
+`

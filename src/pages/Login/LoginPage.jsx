@@ -1,11 +1,12 @@
 import { Col, Container, Form, Image, Row } from 'react-bootstrap'
 import LoginImage from '/images/undraw_medicine.svg'
 import {BsPersonVcardFill} from 'react-icons/bs'
+import { LoginContainer } from './LoginPage.style'
 
 
 export default function LoginPage() {
 	return (
-		<div style={{ height: '100vh', display: 'grid', placeItems: 'center' }}>
+		<LoginContainer>
 			<Container style={{ backgroundColor: '#f2f2f2' }}>
 				<Row className="justify-content-center">
 					<Col>
@@ -33,6 +34,6 @@ export default function LoginPage() {
 					</Col>
 				</Row>
 			</Container>
-		</div>
+		</LoginContainer>
 	)
 }
