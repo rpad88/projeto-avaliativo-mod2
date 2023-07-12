@@ -1,39 +1,19 @@
-import { Col, Container, Form, Image, Row } from 'react-bootstrap'
+import { Col, Container, Image } from 'react-bootstrap'
 import LoginImage from '/images/undraw_medicine.svg'
-import {BsPersonVcardFill} from 'react-icons/bs'
-import { LoginContainer } from './LoginPage.style'
-
+import * as Style  from './LoginPage.style'
+import LoginComponent from '../../components/LoginComponent/Login.component'
 
 export default function LoginPage() {
 	return (
-		<LoginContainer>
-			<Container style={{ backgroundColor: '#f2f2f2' }}>
-				<Row className="justify-content-center">
+		<Style.LoginContainer>
+			<Style.Container >
 					<Col>
-						<Image src={LoginImage} fluid />
+						<Image src={LoginImage} fluid style={{height: '100%'}} />
 					</Col>
-					<Col className="login-wrapper d-flex justify-content-center">
-						<Form className='p-3'>
-								<BsPersonVcardFill size={96} color="#40376E" />
-							<div>
-							</div>
-							<legend>Login</legend>
-							
-							<div className="input-wrapper">
-								<label htmlFor="email">E-mail</label>
-								<input type="email" placeholder='Type your e-mail' />
-							</div>
-							<div className="input-wrapper">
-								<label htmlFor="password">Password</label>
-								<input type="password" placeholder='Type your password'/>
-							</div>
-							<button>Entrar</button>
-						</Form>
-
-						<a href="#">Esqueceu sua senha ?</a>
+					<Col>
+						<LoginComponent />
 					</Col>
-				</Row>
-			</Container>
-		</LoginContainer>
+			</Style.Container>
+		</Style.LoginContainer>
 	)
 }
