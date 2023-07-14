@@ -8,8 +8,7 @@ export const LoginContainer = styled.div`
 `
 
 export const Container = styled.div`
-    display: block;
-    max-width: 700px;
+    max-width: 800px;
 
     @media (min-width: 580px) {
         display: flex;

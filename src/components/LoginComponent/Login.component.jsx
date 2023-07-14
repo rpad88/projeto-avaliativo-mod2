@@ -7,14 +7,18 @@ import ModalComponent from '../Modal/Modal.component'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import UserRegisterComponent from '../UserRegister/UserRegister.component'
+import { AuthContext } from '../../contexts/Auth.context'
 
 export default function LoginComponent() {
 	const { setShow } = useContext(ModalContext)
 	const navigate = useNavigate()
+	const { setAuth } = useContext(AuthContext)
+
 	const {
 		register,
 		handleSubmit,
 		resetField,
+		reset,
 		formState: { errors },
 	} = useForm()
 
@@ -24,14 +28,23 @@ export default function LoginComponent() {
 		setShow(true)
 	}
 
-	const redirectToHome = () => {
+	const redirectToHome = (user) => {
+		setAuth({ user, isLogged: true })
 		navigate('/home')
 	}
 
 	const onSubmit = (data) => {
-		console.log(data)
-		resetField('email')
-		resetField('password')
+		const { email, password } = data
+
+		// TODO: fazer a busca do usuário
+		// const user = users.find(u => u.email === email)
+
+		// if(!user) {
+		// 	reset()
+		// 	return alert('Usuário não cadastrado')
+		// }
+
+		// password === user.password ? redirectToHome(user) : alert('Usuário e/ou senha inválidos')
 	}
 
 	return (
@@ -51,6 +64,7 @@ export default function LoginComponent() {
 							pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
 							required: true,
 						})}
+						error={errors.email}
 					/>
 					{errors.email && (
 						<small style={{ color: 'red' }}>Invalid e-mail</small>
@@ -62,6 +76,7 @@ export default function LoginComponent() {
 						type="password"
 						placeholder="Type your password"
 						{...register('password', { required: true, minLength: 8 })}
+						error={errors.password}
 					/>
 					{errors.password && (
 						<small style={{ color: 'red' }}>
@@ -69,16 +84,25 @@ export default function LoginComponent() {
 						</small>
 					)}
 				</Styled.InputGroup>
-				<Styled.Button>Entrar</Styled.Button>
-				<Row>
-					<a
-						href="#"
-						onClick={() => alert('funcionalidade ainda não implementada')}
-					>
-						Esqueceu sua senha?
-					</a>
-					<button onClick={openModal}>Cadastre-se</button>
-				</Row>
+				<Styled.Button
+					type="submit"
+					$active={!errors.email && !errors.password}
+					disabled={errors.email || errors.password}
+				>
+					Entrar
+				</Styled.Button>
+				<Styled.EsqueciSenha
+					onClick={() => alert('funcionalidade ainda não implementada')}
+				>
+					Esqueceu sua senha?
+				</Styled.EsqueciSenha>
+
+				<Styled.BtnCadastro
+					$outlined
+					onClick={openModal}
+				>
+					Cadastre-se
+				</Styled.BtnCadastro>
 			</Styled.Form>
 			<ModalComponent>
 				<UserRegisterComponent />
