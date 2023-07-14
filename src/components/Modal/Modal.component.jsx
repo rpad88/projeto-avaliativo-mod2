@@ -20,8 +20,7 @@ export default function ModalComponent({ children }) {
             style={{backgroundColor: "rgba(0,0,0, 0.3)"}}
 		>
             <Modal.Body>
-                <h1>teste</h1>
-				
+				{children}
             </Modal.Body>
 		</Modal>
 	)

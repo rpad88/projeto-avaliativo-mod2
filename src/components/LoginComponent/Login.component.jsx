@@ -6,6 +6,7 @@ import { ModalContext } from '../../contexts/ModalContext'
 import ModalComponent from '../Modal/Modal.component'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import UserRegisterComponent from '../UserRegister/UserRegister.component'
 
 export default function LoginComponent() {
 	const { setShow } = useContext(ModalContext)
@@ -79,7 +80,9 @@ export default function LoginComponent() {
 					<button onClick={openModal}>Cadastre-se</button>
 				</Row>
 			</Styled.Form>
-			<ModalComponent></ModalComponent>
+			<ModalComponent>
+				<UserRegisterComponent />
+			</ModalComponent>
 		</>
 	)
 }

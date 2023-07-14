@@ -1,0 +1,32 @@
+{
+    "medicos": [
+        {
+            "id": 1,
+            "nome": "",
+            "genero": "",
+            "data_nascimento": "",
+            "cpf": "",
+            "estado_civil": "",
+            "tel": "",
+            "email": "",
+            "naturalidade": "",
+            "contato_emergencia": "",
+            "alergias": [],
+            "cuidados_especificos": [],
+            "convenio": "",
+            "num_convenio": "",
+            "validade_convenio": "",
+            "endereco": {
+                "cep": "",
+                "cidade": "",
+                "estado": "",
+                "logradouro": "",
+                "numero": "",
+                "complemento": "",
+                "bairro": "",
+                "referencia": ""
+
+            }
+        }
+    ]
+}
