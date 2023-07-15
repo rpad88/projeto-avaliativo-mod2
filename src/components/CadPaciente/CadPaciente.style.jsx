@@ -10,7 +10,31 @@ export const Form = styled.form`
         flex-direction: row;
         flex-wrap: wrap;
     }
-`
+
+	.tres-itens {
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.tres-itens > * {
+		flex-grow: 1;
+		flex-basis: 30%;
+	}
+
+	.dois-itens {
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.dois-itens > * {
+		flex-grow: 1;
+		flex-basis: 40%;
+	}
+` 
 
 export const InputGroup = styled.div`
 	display: flex;
