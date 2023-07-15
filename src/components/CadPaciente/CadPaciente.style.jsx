@@ -11,19 +11,7 @@ export const Form = styled.form`
         flex-wrap: wrap;
     }
 
-	.tres-itens {
-		display: flex;
-		width: 100%;
-		flex-wrap: wrap;
-		gap: 1rem;
-	}
-
-	.tres-itens > * {
-		flex-grow: 1;
-		flex-basis: 30%;
-	}
-
-	.dois-itens {
+	.flex {
 		display: flex;
 		width: 100%;
 		flex-wrap: wrap;
@@ -34,6 +22,15 @@ export const Form = styled.form`
 		flex-grow: 1;
 		flex-basis: 40%;
 	}
+
+	.tres-itens > * {
+		flex: 1 1 30%;
+	}
+
+	.quatro-itens > * {
+		flex: 1 1 20%;
+	}
+	
 ` 
 
 export const InputGroup = styled.div`
@@ -71,4 +68,21 @@ export const Select = styled.select`
 	align-self: stretch;
 	border-radius: 0.5rem;
 	border: 1px solid gray;
+`
+export const Fieldset =  styled.fieldset`
+	width: 100%;
+	padding: 5px;
+	border: 1px dashed gray;
+	border-radius: 6px;
+	margin-top: 2rem;
+	position: relative;
+	
+	legend {
+    position: static;
+	margin-left: 1rem;
+    float: none;
+	width: auto;
+    font-size: 14px;
+    line-height: 18px;
+}
 `
