@@ -32,6 +32,12 @@ export const Form = styled.form`
 		flex: 1 1 20%;
 	}
 	
+	.actions {
+		display: flex;
+		width: 100%;
+		justify-content: flex-end;
+		gap: .5rem;
+	}
 ` 
 
 export const InputGroup = styled.div`
@@ -86,4 +92,48 @@ export const Fieldset =  styled.fieldset`
     font-size: 14px;
     line-height: 18px;
 }
+`
+
+export const BtnSalvar = styled.button`
+	padding: .5rem 1rem;
+	border: 0;
+	border-radius: .5rem;
+	color: #efefef;
+	background-color: #3C6859;
+
+	&:hover{
+		box-shadow: 3px 3px 5px #3C6859;
+	}
+`
+
+export const BtnDeletar = styled.button`
+	padding: .5rem 1rem;
+	border: 0;
+	border-radius: .5rem;
+	color: #efefef;
+	background-color: #48233C;
+
+	&:hover{
+		box-shadow: 3px 3px 5px #48233C;
+	}
+
+	&:disabled {
+		opacity: 0.8;
+	}
+`
+
+export const BtnEditar =styled.button`
+	padding: .5rem 1rem;
+	border: 0;
+	border-radius: .5rem;
+	color: #efefef;
+	background-color: #36558F;
+
+	&:hover{
+		box-shadow: 3px 3px 5px #36558F;
+	}
+
+	&:disabled {
+		opacity: 0.8;
+	}
 `

@@ -35,6 +35,7 @@ export default function LoginComponent() {
 
 	const onSubmit = (data) => {
 		const { email, password } = data
+		console.log(data)
 
 		// TODO: fazer a busca do usuário
 		// const user = users.find(u => u.email === email)
@@ -64,7 +65,6 @@ export default function LoginComponent() {
 							pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
 							required: true,
 						})}
-						error={errors.email}
 					/>
 					{errors.email && (
 						<small style={{ color: 'red' }}>Invalid e-mail</small>
@@ -76,7 +76,6 @@ export default function LoginComponent() {
 						type="password"
 						placeholder="Type your password"
 						{...register('password', { required: true, minLength: 8 })}
-						error={errors.password}
 					/>
 					{errors.password && (
 						<small style={{ color: 'red' }}>
