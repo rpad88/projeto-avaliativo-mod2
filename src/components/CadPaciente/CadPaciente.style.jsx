@@ -16,6 +16,7 @@ export const Form = styled.form`
 		width: 100%;
 		flex-wrap: wrap;
 		gap: 1rem;
+		margin-top: 1rem;
 	}
 
 	.dois-itens > * {

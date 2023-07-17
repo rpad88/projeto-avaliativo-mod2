@@ -1,44 +1,80 @@
-import { Container, Form } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import * as Styled from './CadPaciente.style'
 import { useRef } from 'react'
 import { CadastroService } from '../../services/Cadastro.service'
+import { useForm } from 'react-hook-form'
 
 export default function CadPacienteComponent() {
-	const cidadeRef = useRef()
-	const estadoRef = useRef()
-	const ruaRef = useRef()
-	const bairroRef = useRef()
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm()
+	// const cidadeRef = useRef()
+	// const estadoRef = useRef()
+	// const ruaRef = useRef()
+	// const bairroRef = useRef()
 	const cepRef = useRef()
+
+	const submitForm = (data) => {
+		console.log('submitForm')
+		console.log(data)
+	}
 
 	const cepInput = async () => {
 		const cep = cepRef.current.value
 		const data = await CadastroService.GetEndereco(cep)
 
-		ruaRef.current.value = data.logradouro
-		bairroRef.current.value = data.bairro
-		cidadeRef.current.value = data.localidade
-		estadoRef.current.value = data.uf
+		// ruaRef.current.value = data.logradouro
+		// bairroRef.current.value = data.bairro
+		// cidadeRef.current.value = data.localidade
+		// estadoRef.current.value = data.uf
 	}
 
 	return (
 		<Container>
 			<h4 style={{ textAlign: 'center', marginTop: '1.5rem' }}>Cadastro</h4>
-			<Styled.Form>
+			<Styled.Form onSubmit={handleSubmit(submitForm)}>
 				<Styled.InputGroup>
-					<Styled.Label htmlFor="nome" required>
-						Nome completo
-					</Styled.Label>
-					<Styled.Input name="nome" />
+					<Styled.Label htmlFor="nome">Nome completo</Styled.Label>
+					<Styled.Input
+						id="nome"
+						name="nome"
+						register={{
+							...register('nome'),
+						}}
+					/>
 				</Styled.InputGroup>
 				<Styled.InputGroup>
 					<Styled.Label htmlFor="email">E-mail</Styled.Label>
-					<Styled.Input type="email" name="email" />
+					<Styled.Input
+						type="email"
+						name="email"
+						id="email"
+						register={{
+							...register('email', {
+								required: true,
+								pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+							}),
+						}}
+						// error={errors.email}
+					/>
 				</Styled.InputGroup>
 
 				<div className="flex quatro-itens">
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="genero">Gênero</Styled.Label>
-						<Styled.Select name="genero" required>
+						<Styled.Select
+							name="genero"
+							id="genero"
+							register={{
+								...register('genero', {
+									required: true,
+								}),
+							}}
+							// error={errors.genero}
+						>
 							<option value="" hidden>
 								Escolha uma opção
 							</option>
@@ -72,7 +108,7 @@ export default function CadPacienteComponent() {
 				<div className="flex tres-itens">
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="tel">Telefone</Styled.Label>
-						<Styled.Input type="number" name="tel" />
+						<Styled.Input type="tel" name="tel" />
 					</Styled.InputGroup>
 
 					<Styled.InputGroup>
@@ -125,49 +161,27 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="number"
 								name="cep"
-								required
-								onBlur={cepInput}
-								ref={cepRef}
+								// onBlur={cepInput}
 								maxLength={8}
 							/>
 						</Styled.InputGroup>
 						<Styled.InputGroup style={{ flexBasis: '10%' }}>
 							<Styled.Label htmlFor="estado">Estado</Styled.Label>
-							<Styled.Input
-								type="text"
-								name="estado"
-								disabled
-								ref={estadoRef}
-							/>
+							<Styled.Input type="text" name="estado" disabled />
 						</Styled.InputGroup>
 						<Styled.InputGroup>
 							<Styled.Label htmlFor="cidade">Cidade</Styled.Label>
-							<Styled.Input
-								type="text"
-								name="cidade"
-								disabled
-								ref={cidadeRef}
-							/>
+							<Styled.Input type="text" name="cidade" disabled />
 						</Styled.InputGroup>
 					</div>
 					<div className="flex tres-itens">
 						<Styled.InputGroup>
 							<Styled.Label htmlFor="rua">Logradouro</Styled.Label>
-							<Styled.Input
-								type="text"
-								name="rua"
-								disabled
-								ref={ruaRef}
-							/>
+							<Styled.Input type="text" name="rua" disabled />
 						</Styled.InputGroup>
 						<Styled.InputGroup>
 							<Styled.Label htmlFor="bairro">Bairro</Styled.Label>
-							<Styled.Input
-								type="text"
-								name="bairro"
-								disabled
-								ref={bairroRef}
-							/>
+							<Styled.Input type="text" name="bairro" disabled />
 						</Styled.InputGroup>
 						<Styled.InputGroup style={{ flexBasis: '10%' }}>
 							<Styled.Label htmlFor="numero">Número</Styled.Label>
@@ -189,6 +203,10 @@ export default function CadPacienteComponent() {
 						</Styled.InputGroup>
 					</div>
 				</Styled.Fieldset>
+				<div className="actions">
+					<button>Editar</button>
+					<button type="submit" onClick={() => console.log('submit btn')}>Salvar</button>
+				</div>
 			</Styled.Form>
 		</Container>
 	)
