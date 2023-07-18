@@ -52,5 +52,13 @@
       "referencia": "",
       "id": 2
     }
+  ],
+  "users": [
+    {
+      "email": "admin@usercep.com",
+      "password": "123456789",
+      "confirm": "123456789",
+      "id": 1
+    }
   ]
 }

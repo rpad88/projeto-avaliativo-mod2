@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import UserRegisterComponent from '../UserRegister/UserRegister.component'
 import { AuthContext } from '../../contexts/Auth.context'
+import { CadastroService } from '../../services/Cadastro.service'
 
 export default function LoginComponent() {
 	const { setShow } = useContext(ModalContext)
@@ -33,19 +34,17 @@ export default function LoginComponent() {
 		navigate('/home')
 	}
 
-	const onSubmit = (data) => {
-		const { email, password } = data
-		console.log(data)
+	const onSubmit = async (data) => {
+		const usersFromDb = await CadastroService.VerificaConta()
 
-		// TODO: fazer a busca do usuário
-		// const user = users.find(u => u.email === email)
+		const user = usersFromDb.find((u) => u.email === data.email)
 
-		// if(!user) {
-		// 	reset()
-		// 	return alert('Usuário não cadastrado')
-		// }
+		if (!user) {
+			reset()
+			return alert('Usuário não cadastrado')
+		}
 
-		// password === user.password ? redirectToHome(user) : alert('Usuário e/ou senha inválidos')
+		data.password === user.password ? redirectToHome(user) : alert('Usuário e/ou senha inválidos')
 	}
 
 	return (
@@ -96,10 +95,7 @@ export default function LoginComponent() {
 					Esqueceu sua senha?
 				</Styled.EsqueciSenha>
 
-				<Styled.BtnCadastro
-					$outlined
-					onClick={openModal}
-				>
+				<Styled.BtnCadastro $outlined onClick={openModal}>
 					Cadastre-se
 				</Styled.BtnCadastro>
 			</Styled.Form>
