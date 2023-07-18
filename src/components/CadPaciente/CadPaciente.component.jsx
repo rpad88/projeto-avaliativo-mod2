@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap'
 import * as Styled from './CadPaciente.style'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { CadastroService } from '../../services/Cadastro.service'
 import { useForm } from 'react-hook-form'
 
@@ -8,7 +8,7 @@ export default function CadPacienteComponent() {
 	const {
 		register,
 		handleSubmit,
-		reset,
+		setValue,
 		formState: { errors },
 	} = useForm()
 	const cidadeRef = useRef()
@@ -18,18 +18,26 @@ export default function CadPacienteComponent() {
 	const cepRef = useRef()
 
 	const submitForm = (data) => {
-		console.log('submitForm')
 		console.table(data)
+
+		if(errors.logradouro || errors.cidade) return alert('você deve inserir um CEP válido')
+		CadastroService.CadastraPaciente(data)
+		
 	}
 
 	const cepInput = async () => {
 		const cep = cepRef.current.value
-		const data = await CadastroService.GetEndereco(cep)
+		try {
+			const data = await CadastroService.GetEndereco(cep)
 
-		ruaRef.current.value = data.logradouro
-		bairroRef.current.value = data.bairro
-		cidadeRef.current.value = data.localidade
-		estadoRef.current.value = data.uf
+			setValue('rua', data.logradouro)
+			setValue('bairro', data.bairro)
+			setValue('cidade', data.localidade)
+			setValue('estado', data.uf)
+			setValue('cep', cep)
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return (
@@ -41,9 +49,13 @@ export default function CadPacienteComponent() {
 					<Styled.Input
 						name="nome"
 						{...register('nome', {
-							required: true
+							required: true,
+							minLength: 5,
+							maxLength: 50,
 						})}
+						className={errors.nome && 'danger'}
 					/>
+					{errors.nome && <small>Favor inserir o nome completo</small>}
 				</Styled.InputGroup>
 				<Styled.InputGroup>
 					<Styled.Label htmlFor="email">E-mail</Styled.Label>
@@ -51,10 +63,11 @@ export default function CadPacienteComponent() {
 						type="email"
 						name="email"
 						{...register('email', {
-							required: true,
 							pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
 						})}
+						className={errors.email && 'danger'}
 					/>
+					{errors.email && <small>Favor inserir um e-mail válido</small>}
 				</Styled.InputGroup>
 
 				<div className="flex quatro-itens">
@@ -65,6 +78,7 @@ export default function CadPacienteComponent() {
 							{...register('genero', {
 								required: true,
 							})}
+							className={errors.genero && 'danger'}
 						>
 							<option value="" hidden>
 								Escolha uma opção
@@ -72,6 +86,7 @@ export default function CadPacienteComponent() {
 							<option value="m">Masculino</option>
 							<option value="f">Feminino</option>
 						</Styled.Select>
+						{errors.genero && <small>Informe seu gênero</small>}
 					</Styled.InputGroup>
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="nascimento">
@@ -83,25 +98,33 @@ export default function CadPacienteComponent() {
 							// pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 							{...register('nascimento', {
 								required: true,
-								pattern: /[0-9]{4}-[0-9]{2}-[0-9]{2}/ //Colocado o patter para teste
+								pattern: /[0-9]{4}-[0-9]{2}-[0-9]{2}/, //Colocado o patter para teste
 							})}
+							className={errors.nascimento && 'danger'}
 						/>
+						{errors.nascimento && (
+							<small>Informe sua data de nascimento</small>
+						)}
 					</Styled.InputGroup>
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="cpf">CPF</Styled.Label>
 						<Styled.Input
 							type="tel"
 							name="cpf"
+							minLength={11}
 							maxLength={11}
 							// pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
 							{...register('cpf', { required: true })}
+							className={errors.cpf && 'danger'}
 						/>
+						{errors.cpf && <small>Informe seu CPF</small>}
 					</Styled.InputGroup>
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="nome">Estado Civil</Styled.Label>
 						<Styled.Select
-							name="estado-civil"
-							{...register('estado-civil')}
+							name="estadoCivil"
+							{...register('estadoCivil', { required: true })}
+							className={errors.cpf && 'danger'}
 						>
 							<option value="" hidden>
 								Escolha uma opção
@@ -111,12 +134,24 @@ export default function CadPacienteComponent() {
 							<option value="divorciado">Divorciado(a)</option>
 							<option value="viuvo">Viuvo(a)</option>
 						</Styled.Select>
+						{errors.estadoCivil && (
+							<small>Informe seu estado civil</small>
+						)}
 					</Styled.InputGroup>
 				</div>
 				<div className="flex tres-itens">
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="tel">Telefone</Styled.Label>
-						<Styled.Input type="tel" name="tel" {...register('tel')} />
+						<Styled.Input
+							type="tel"
+							name="tel"
+							{...register('tel', { required: true })}
+							placeholder="(xx) 9 9999-9999"
+							maxLength={11}
+							minLength={11}
+							className={errors.tel && 'danger'}
+						/>
+						{errors.tel && <small>Informe seu telefone</small>}
 					</Styled.InputGroup>
 
 					<Styled.InputGroup>
@@ -125,18 +160,31 @@ export default function CadPacienteComponent() {
 						</Styled.Label>
 						<Styled.Input
 							name="naturalidade"
-							{...register('naturalidade')}
+							{...register('naturalidade', {
+								required: true,
+								minLength: 5,
+								maxLength: 50,
+							})}
+							className={errors.naturalidade && 'danger'}
 						/>
+						{errors.naturalidade && (
+							<small>Informe sua naturalidade</small>
+						)}
 					</Styled.InputGroup>
 					<Styled.InputGroup>
-						<Styled.Label htmlFor="contato-emergencia">
+						<Styled.Label htmlFor="contatoEmergencia">
 							Contato de emergência
 						</Styled.Label>
 						<Styled.Input
 							type="tel"
-							name="contato-emergencia"
-							{...register('contato-emergencia')}
+							name="contatoEmergencia"
+							{...register('contatoEmergencia', { required: true, minLength: 11, maxLength: 11})}
+							className={errors.contatoEmergencia && 'danger'}
+
 						/>
+						{errors.contatoEmergencia && (
+							<small>Informe um contato de emergência</small>
+						)}
 					</Styled.InputGroup>
 				</div>
 				<div className="flex dois-itens">
@@ -167,23 +215,23 @@ export default function CadPacienteComponent() {
 						/>
 					</Styled.InputGroup>
 					<Styled.InputGroup>
-						<Styled.Label htmlFor="n-convenio">
+						<Styled.Label htmlFor="numConvenio">
 							Número do convênio
 						</Styled.Label>
 						<Styled.Input
 							type="text"
-							name="n-convenio"
-							{...register('n-convenio')}
+							name="numConvenio"
+							{...register('numConvenio')}
 						/>
 					</Styled.InputGroup>
 					<Styled.InputGroup>
-						<Styled.Label htmlFor="validade-convenio">
+						<Styled.Label htmlFor="valConvenio">
 							Validade do convênio
 						</Styled.Label>
 						<Styled.Input
 							type="date"
-							name="validade-convenio"
-							{...register('validade-convenio')}
+							name="valConvenio"
+							{...register('valConvenio')}
 						/>
 					</Styled.InputGroup>
 				</div>
@@ -195,12 +243,11 @@ export default function CadPacienteComponent() {
 							<Styled.Label htmlFor="cep">CEP</Styled.Label>
 							<Styled.Input
 								type="tel"
-								id='cep'
 								name="cep"
-								ref={cepRef}
+								{...register('cep')}
 								onBlur={cepInput}
 								maxLength={8}
-								{...register('cep')}
+								ref={cepRef}
 							/>
 						</Styled.InputGroup>
 						<Styled.InputGroup style={{ flexBasis: '10%' }}>
@@ -208,10 +255,12 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="text"
 								name="estado"
-								id='estado'
 								ref={estadoRef}
-								disabled
+								readOnly
+								value={''}
 								{...register('estado')}
+								className={errors.estado && 'danger'}
+
 							/>
 						</Styled.InputGroup>
 						<Styled.InputGroup>
@@ -219,10 +268,11 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="text"
 								name="cidade"
-								id='cidade'
 								ref={cidadeRef}
-								disabled
+								value={''}
+								readOnly
 								{...register('cidade')}
+								className={errors.cidade && 'danger'}
 							/>
 						</Styled.InputGroup>
 					</div>
@@ -232,9 +282,9 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="text"
 								name="rua"
-								id='rua'
 								ref={ruaRef}
-								disabled
+								value={''}
+								readOnly
 								{...register('rua')}
 							/>
 						</Styled.InputGroup>
@@ -243,9 +293,8 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="text"
 								name="bairro"
-								id='bairro'
 								ref={bairroRef}
-								disabled
+								readOnly
 								{...register('bairro')}
 							/>
 						</Styled.InputGroup>

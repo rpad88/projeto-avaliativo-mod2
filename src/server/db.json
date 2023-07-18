@@ -1,32 +1,56 @@
 {
-    "medicos": [
-        {
-            "id": 1,
-            "nome": "",
-            "genero": "",
-            "data_nascimento": "",
-            "cpf": "",
-            "estado_civil": "",
-            "tel": "",
-            "email": "",
-            "naturalidade": "",
-            "contato_emergencia": "",
-            "alergias": [],
-            "cuidados_especificos": [],
-            "convenio": "",
-            "num_convenio": "",
-            "validade_convenio": "",
-            "endereco": {
-                "cep": "",
-                "cidade": "",
-                "estado": "",
-                "logradouro": "",
-                "numero": "",
-                "complemento": "",
-                "bairro": "",
-                "referencia": ""
-
-            }
-        }
-    ]
+  "pacientes": [
+    {
+      "id": 1,
+      "nome": "",
+      "genero": "",
+      "data_nascimento": "",
+      "cpf": "",
+      "estado_civil": "",
+      "tel": "",
+      "email": "",
+      "naturalidade": "",
+      "contato_emergencia": "",
+      "alergias": [],
+      "cuidados_especificos": [],
+      "convenio": "",
+      "num_convenio": "",
+      "validade_convenio": "",
+      "endereco": {
+        "cep": "",
+        "cidade": "",
+        "estado": "",
+        "logradouro": "",
+        "numero": "",
+        "complemento": "",
+        "bairro": "",
+        "referencia": ""
+      }
+    },
+    {
+      "nome": "Fulano da silva",
+      "email": "fulano@teste.com",
+      "genero": "m",
+      "nascimento": "2000-10-10",
+      "cpf": "12345678901",
+      "estadoCivil": "casado",
+      "tel": "65912345678",
+      "naturalidade": "Cuiaba",
+      "contatoEmergencia": "65912345678",
+      "alergias": "",
+      "cuidados": "",
+      "convenio": "",
+      "numConvenio": "",
+      "valConvenio": "",
+      "cep": "78030030",
+      "estado": "MT",
+      "cidade": "Cuiabá",
+      "rua": "Rua Oir Castilho",
+      "bairro": "Cidade Alta",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "id": 2
+    }
+  ]
 }

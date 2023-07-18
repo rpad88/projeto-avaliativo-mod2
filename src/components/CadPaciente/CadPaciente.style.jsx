@@ -38,6 +38,14 @@ export const Form = styled.form`
 		justify-content: flex-end;
 		gap: .5rem;
 	}
+
+	.danger {
+		border-color: #dc3545;
+	}
+
+	small {
+		color: #dc3545;
+	}
 ` 
 
 export const InputGroup = styled.div`
@@ -66,6 +74,10 @@ export const Input = styled.input`
 	align-self: stretch;
 	border-radius: 0.5rem;
 	border: 1px solid gray;
+
+	&:disabled {
+		background-color: #d3d3d3;
+	}
 `
 
 export const Select = styled.select`
