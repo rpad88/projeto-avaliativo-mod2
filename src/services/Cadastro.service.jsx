@@ -31,6 +31,7 @@ const CadastraPaciente = async (dadosDoForm) => {
 			})
 			.then((update) => {
 				console.log(update)
+                return true
 			})
 	} catch (error) {
 		error.message

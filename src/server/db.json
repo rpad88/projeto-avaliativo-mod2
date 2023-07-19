@@ -51,6 +51,31 @@
       "complemento": "",
       "referencia": "",
       "id": 2
+    },
+    {
+      "nome": "Beltrano Barbosa",
+      "email": "beltrano@barbosa.com",
+      "genero": "m",
+      "nascimento": "1999-01-01",
+      "cpf": "98765432101",
+      "estadoCivil": "solteiro",
+      "tel": "34999999999",
+      "naturalidade": "Araguari",
+      "contatoEmergencia": "65999678901",
+      "alergias": "",
+      "cuidados": "",
+      "convenio": "",
+      "numConvenio": "",
+      "valConvenio": "",
+      "cep": "38446002",
+      "estado": "MG",
+      "cidade": "Araguari",
+      "rua": "Rua Ângelo de Lima",
+      "bairro": "Bosque",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "id": 3
     }
   ],
   "users": [
