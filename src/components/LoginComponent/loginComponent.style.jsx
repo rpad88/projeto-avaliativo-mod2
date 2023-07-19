@@ -6,7 +6,7 @@ export const Form = styled.form`
 	flex-direction: column;
 	align-items: center;
 	gap: 1rem;
-    padding: 1rem;
+	padding: 1rem;
 `
 export const FormHeader = styled.div`
 	position: relative;
@@ -47,19 +47,51 @@ export const Button = styled.button`
 	padding: 0.5rem 1rem;
 	align-self: stretch;
 	border-radius: 0.5rem;
-    border: 1px solid;
+	border: 1px solid;
 	background: ${({ $outlined }) => {
-		return $outlined ? 'transparent' : '#528e7ac7'
+		return $outlined ? 'transparent' : '#528e7a'
 	}};
 	color: ${({ $outlined }) => {
 		return $outlined ? '#000' : '#fefefe'
 	}};
 
 	border-color: ${({ $outlined }) => {
-		return $outlined ? '#528E7A' : 'transparent'
+		return $outlined ? '#528e7a' : 'transparent'
+	}};
+
+	opacity: ${({ $active }) => {
+		return $active ? '1' : '.5'
 	}};
 
 	&:hover {
 		background-color: #528e7a;
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+	}
+`
+export const EsqueciSenha = styled.a`
+	color: #666;
+	font-size: 0.9rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+
+	&:hover {
+		cursor: pointer;
+		color: #528e7a;
+	}
+`
+export const BtnCadastro = styled.a`
+	color: #666;
+	font-size: 0.9rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+
+	&:hover {
+		cursor: pointer;
+		color: rgba(229, 149, 0, 1);
 	}
 `
