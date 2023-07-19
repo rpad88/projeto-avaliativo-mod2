@@ -353,9 +353,8 @@ export default function CadPacienteComponent() {
 				</Styled.Form>
 			</Container>
 			
-			
 			<ModalComponent>
-				<SuccessComponent/>
+				<SuccessComponent />
 			</ModalComponent>
 			
 		</>
