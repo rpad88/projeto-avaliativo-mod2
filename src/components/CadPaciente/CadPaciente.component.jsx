@@ -25,8 +25,7 @@ export default function CadPacienteComponent() {
 
 
 	const submitForm = (data) => {
-		console.table(data)
-
+		// console.table(data)
 		if (errors.logradouro || errors.cidade)
 			return alert('você deve inserir um CEP válido')
 		const ok = CadastroService.CadastraPaciente(data)
