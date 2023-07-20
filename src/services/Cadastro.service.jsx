@@ -30,15 +30,15 @@ const CadastraPaciente = async (dadosDoForm) => {
 				return data.json()
 			})
 			.then((update) => {
-				console.log(update)
+				// console.log(update)
                 return true
 			})
 	} catch (error) {
-		error.message
+		console.error(error.message)
 	}
 }
 
-// GET | LOGIN
+// GET | User LOGIN
 const VerificaConta = async () => {
 	try {
 		const users = fetch(USERS_URL).then((res) => {
@@ -53,6 +53,13 @@ const VerificaConta = async () => {
 // POST | Cadastro de usuário
 const CadastraUser = async (dados) => {
 	try {
+		// pega o array no banco
+		const arrayDeUsers = await fetch(USERS_URL).then(res => res.json())
+		// verifica se o e-mail já existe
+		const userJaExiste = arrayDeUsers.find((u) => u.email === dados.email )
+
+		if(userJaExiste) return alert("Email já cadastrado.")
+
 		const newUser = {
 			method: 'POST',
 			headers: {
@@ -67,6 +74,10 @@ const CadastraUser = async (dados) => {
 	} catch (error) {
 		console.error(error.message)
 	}
+}
+
+const BuscaUser = async (dados) => {
+
 }
 
 export const CadastroService = {

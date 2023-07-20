@@ -49,14 +49,14 @@ export const Button = styled.button`
 	border-radius: 0.5rem;
 	border: 1px solid;
 	background: ${({ $outlined }) => {
-		return $outlined ? 'transparent' : '#528e7a'
+		return $outlined ? 'transparent' : 'rgb(82, 142, 122)'
 	}};
 	color: ${({ $outlined }) => {
 		return $outlined ? '#000' : '#fefefe'
 	}};
 
 	border-color: ${({ $outlined }) => {
-		return $outlined ? '#528e7a' : 'transparent'
+		return $outlined ? 'rgb(82, 142, 122)' : 'transparent'
 	}};
 
 	opacity: ${({ $active }) => {
@@ -64,7 +64,7 @@ export const Button = styled.button`
 	}};
 
 	&:hover {
-		background-color: #528e7a;
+		background-color: rgb(82, 142, 122);
 	}
 
 	&:disabled {
@@ -80,7 +80,7 @@ export const EsqueciSenha = styled.a`
 
 	&:hover {
 		cursor: pointer;
-		color: #528e7a;
+		color: rgb(82, 142, 122);
 	}
 `
 export const BtnCadastro = styled.a`
