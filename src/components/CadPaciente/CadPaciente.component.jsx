@@ -12,6 +12,7 @@ export default function CadPacienteComponent() {
 		register,
 		handleSubmit,
 		setValue,
+		reset,
 		formState: { errors },
 	} = useForm()
 	const cidadeRef = useRef()
@@ -25,12 +26,12 @@ export default function CadPacienteComponent() {
 
 
 	const submitForm = (data) => {
-		console.table(data)
-
+		// console.table(data)
 		if (errors.logradouro || errors.cidade)
 			return alert('você deve inserir um CEP válido')
 		const ok = CadastroService.CadastraPaciente(data)
-		if(ok) setShow(true)
+		if(ok) setShow(true) //Abre a animação confirmando o cadastro.
+		reset() //Limpa os inputs
 	}
 
 	const cepInput = async () => {
@@ -38,6 +39,7 @@ export default function CadPacienteComponent() {
 		try {
 			const data = await CadastroService.GetEndereco(cep)
 
+			//IMPORTANTE setar os valores puxados pela API no input antes de salvar.
 			setValue('rua', data.logradouro)
 			setValue('bairro', data.bairro)
 			setValue('cidade', data.localidade)
@@ -191,6 +193,7 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="tel"
 								name="contatoEmergencia"
+								maxLength={11}
 								{...register('contatoEmergencia', {
 									required: true,
 									minLength: 11,
