@@ -1,11 +1,16 @@
-.nav {
-    display: flex;
-    flex-direction: column;
+.offcanvas {
+    display: block;
     height: 100%;
     align-items: center;
-    background-color: rgb(56, 107, 201);
+    background-color: rgb(56, 107, 201) !important;
     padding: 1rem;
-    padding-left: 1rem !important;
+    max-width: 300px !important;
+    color: #fefefe;
+}
+
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
     color: #fefefe;
 }
 
@@ -49,21 +54,4 @@
     font-size: .85rem;
     gap: .5rem;
     align-items: center;
-
-    & button {
-        background-color: transparent;
-        border: 1px solid #ffffff67;
-        color: #fefefe;
-        border-radius: 6px;
-        border: 0;
-        padding: 0;
-
-        &:hover {
-            box-shadow: 0 0 5px #ffffff67;
-        }
-
-        & i svg {
-            font-size: 1.5rem;
-        }
-    }
 }
