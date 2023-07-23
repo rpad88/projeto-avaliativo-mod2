@@ -1,4 +1,4 @@
-import { Form, Image, Nav, Offcanvas } from "react-bootstrap"
+import { Form, Image } from "react-bootstrap"
 import "./sidebar.style.css"
 import {
 	IoStatsChartOutline,
@@ -6,78 +6,78 @@ import {
 	IoAddSharp,
 	IoList,
 } from "react-icons/io5"
-import { useState } from "react"
+import { useContext } from "react"
+import { Sidebar, SidebarActions, SidebarBody, TopicWrapper } from "./sidebar.style"
+import { SidebarContext } from "../../contexts/SidebarContext"
 
-export default function SidebarComponent() {
-	const [showSidebar, setShowSidebar] = useState(true)
-	const handleClose = () => {
-		setShowSidebar(false)
-	}
-
+export default function SidebarComponent({showSidebar}) {
 
 	return (
-		<Offcanvas show={showSidebar} backdrop={false} scroll={true}>
-			<Offcanvas.Body>
+		<Sidebar show={showSidebar} $isOpened={showSidebar}>
+			<SidebarBody>
 				<div className="img-wrapper">
-					<Image src="../../public/images/LABMedical_logo.png"></Image>
+					<Image src="../../public/images/LABMedical_logo.png" fluid></Image>
 				</div>
-				<div className="actions">
-					<div className="topic-wrapper">
+				<SidebarActions>
+					<TopicWrapper>
 						<small>Geral</small>
 						<button>
 							<i>
 								<IoStatsChartOutline />
 							</i>
+							<span style={{display: showSidebar? "": "none"}}>
 							INICIO
+							</span>
 						</button>
 						<button>
 							<i>
 								<IoExitOutline />
 							</i>
+							<span style={{display: showSidebar? "": "none"}}>
 							SAIR
+							</span>
 						</button>
-					</div>
-					<div className="topic-wrapper">
+					</TopicWrapper>
+					<TopicWrapper>
 						<small>Pacientes</small>
 						<button>
 							<i>
 								<IoAddSharp />
 							</i>
+							<span style={{display: showSidebar? "": "none"}}>
 							CADASTRAR
+							</span>
 						</button>
 						<button>
 							<i>
 								<IoList />
 							</i>
+							<span style={{display: showSidebar? "": "none"}}>
 							LISTAR PRONTUARIO
+							</span>
 						</button>
-					</div>
-					<div className="topic-wrapper">
+					</TopicWrapper>
+					<TopicWrapper>
 						<small>Exames</small>
 						<button>
 							<i>
 								<IoAddSharp />
 							</i>
+							<span style={{display: showSidebar? "": "none"}}>
 							CADASTRAR CONSULTA
+							</span>
 						</button>
 						<button>
 							<i>
 								<IoAddSharp />
 							</i>
+							<span style={{display: showSidebar? "": "none"}}>
 							CADASTRAR EXAME
+							</span>
 						</button>
-					</div>
-				</div>
-				<div className="hide-wrapper">
-					<span>Encolher menu</span>
-					<Form.Switch
-						type="switch"
-						id="closeMenu"
-						checked={showSidebar}
-						onChange={handleClose}
-					/>
-				</div>
-			</Offcanvas.Body>
-		</Offcanvas>
+					</TopicWrapper>
+				</SidebarActions>
+			</SidebarBody>
+		</Sidebar>
 	)
 }

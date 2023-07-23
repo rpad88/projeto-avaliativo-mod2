@@ -2,7 +2,9 @@ import { createContext, useState } from "react";
 
 export const SidebarContext = createContext({
     showSidebar: true,
-    setShowSidebar: () => {}
+    setShowSidebar: () => {},
+    isOpened: true,
+    setIsOpened: () => {}
 })
 
 export const SidebarProvider = ({children}) => {

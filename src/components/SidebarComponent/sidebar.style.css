@@ -1,14 +1,15 @@
-.offcanvas {
-    display: block;
-    height: 100%;
+.sidebar {
+    /* height: 100%; */
     align-items: center;
-    background-color: rgb(56, 107, 201) !important;
+    background-color: rgb(56, 107, 201);
     padding: 1rem;
-    max-width: 300px !important;
+    max-width: 280px;
     color: #fefefe;
+    position: fixed;
+    inset: 0;
 }
 
-.offcanvas-body {
+.sidebar-body {
     display: flex;
     flex-direction: column;
     color: #fefefe;
