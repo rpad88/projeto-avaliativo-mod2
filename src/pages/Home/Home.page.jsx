@@ -4,6 +4,7 @@ import "./home.style.css"
 import { useContext } from "react"
 import { SidebarContext } from "../../contexts/SidebarContext"
 import HeaderComponent from "../../components/HeaderComponent/Header.component"
+import StatusComponent from "../../components/StatusComponent/Status.component"
 
 export default function HomePage() {
 	const { showSidebar, setShowSidebar} =
@@ -23,7 +24,7 @@ export default function HomePage() {
 				/>
 				<Container fluid>
 					<HeaderComponent showSidebar={showSidebar} handleShowSidebar={handleShowSidebar} />
-					<main>Container</main>
+					<StatusComponent />
 				</Container>
 			</div>
 		</>
