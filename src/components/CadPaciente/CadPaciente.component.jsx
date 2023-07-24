@@ -54,7 +54,7 @@ export default function CadPacienteComponent() {
 		<>
 			<Container>
 				<h4 style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-					Cadastro
+					Cadastro de Paciente
 				</h4>
 				<Styled.Form onSubmit={handleSubmit(submitForm)}>
 					<Styled.InputGroup>
