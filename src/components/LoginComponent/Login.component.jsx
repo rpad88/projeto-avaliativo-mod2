@@ -32,6 +32,7 @@ export default function LoginComponent() {
 	const redirectToHome = (user) => {
 		setAuth({ user, isLogged: true })
 		navigate('/home')
+		console.log(user)
 	}
 
 	const onSubmit = async (data) => {

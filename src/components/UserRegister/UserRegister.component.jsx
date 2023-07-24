@@ -10,6 +10,7 @@ export default function UserRegisterComponent() {
 	// FUNÇÕES
 	const {
 		register,
+		unregister,
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
@@ -60,6 +61,7 @@ export default function UserRegisterComponent() {
 					type="password"
 					placeholder="Confirme sua senha"
 					{...register("confirm", { required: true, minLength: 9 })}
+					{...unregister('confirm')}
 				/>
 				{errors.confirm && (
 					<small style={{ color: "red" }}>

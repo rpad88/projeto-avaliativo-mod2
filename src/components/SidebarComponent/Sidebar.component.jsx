@@ -7,8 +7,17 @@ import {
 	IoList,
 } from "react-icons/io5"
 import { Sidebar, SidebarActions, SidebarBody, TopicWrapper } from "./sidebar.style"
+import { useContext } from "react"
+import { AuthContext } from "../../contexts/Auth.context"
+import { useNavigate } from "react-router-dom"
 
 export default function SidebarComponent({showSidebar}) {
+	const navigate = useNavigate()
+	const {auth, setAuth} = useContext(AuthContext)
+	const handleSair = () => {
+		setAuth(!auth)
+		navigate('/')
+	}
 
 	return (
 		<Sidebar show={showSidebar} $isOpened={showSidebar}>
@@ -27,13 +36,14 @@ export default function SidebarComponent({showSidebar}) {
 							INICIO
 							</span>
 						</button>
-						<button>
+						<button onClick={handleSair}>
 							<i>
 								<IoExitOutline />
 							</i>
 							<span style={{display: showSidebar? "": "none"}}>
 							SAIR
 							</span>
+							
 						</button>
 					</TopicWrapper>
 					<TopicWrapper>

@@ -1,20 +1,13 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import './App.css'
-import LoginPage from './pages/Login/LoginPage'
-import CadPacientePage from './pages/CadPaciente/CadPaciente.page'
-import HomePage from './pages/Home/Home.page'
+import "./App.css"
+import { useContext } from "react"
+import { AuthContext } from "./contexts/Auth.context"
+import PrivateRoutes from "./routes/PrivateRoutes"
+import PublicRoutes from "./routes/PublicRoutes"
 
 function App() {
-  
-  return (
-      <Router>
-        <Routes>
-          <Route path='/' element={<LoginPage/>} />
-          <Route path='/cadPaciente' element={<CadPacientePage/>} />
-          <Route path='/home' element={<HomePage/>} />
-        </Routes>
-      </Router>
-  )
+	const { auth } = useContext(AuthContext)
+
+	return auth ? <PrivateRoutes /> : <PublicRoutes />
 }
 
 export default App

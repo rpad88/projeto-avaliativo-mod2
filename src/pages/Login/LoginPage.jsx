@@ -1,4 +1,4 @@
-import { Col, Container, Image } from 'react-bootstrap'
+import { Col, Image } from 'react-bootstrap'
 import LoginImage from '/images/undraw_medicine.svg'
 import * as Style  from './LoginPage.style'
 import LoginComponent from '../../components/LoginComponent/Login.component'
