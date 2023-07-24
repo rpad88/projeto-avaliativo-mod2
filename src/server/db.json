@@ -84,6 +84,12 @@
       "password": "123456789",
       "confirm": "123456789",
       "id": 1
+    },
+    {
+      "email": "beltrano@barbosa.com",
+      "password": "987654321",
+      "confirm": "987654321",
+      "id": 2
     }
   ]
 }
