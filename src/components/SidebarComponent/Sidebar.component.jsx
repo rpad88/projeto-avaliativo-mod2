@@ -6,9 +6,7 @@ import {
 	IoAddSharp,
 	IoList,
 } from "react-icons/io5"
-import { useContext } from "react"
 import { Sidebar, SidebarActions, SidebarBody, TopicWrapper } from "./sidebar.style"
-import { SidebarContext } from "../../contexts/SidebarContext"
 
 export default function SidebarComponent({showSidebar}) {
 

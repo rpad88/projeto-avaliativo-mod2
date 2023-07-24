@@ -3,7 +3,7 @@ import SidebarComponent from "../../components/SidebarComponent/Sidebar.componen
 import "./home.style.css"
 import { useContext } from "react"
 import { SidebarContext } from "../../contexts/SidebarContext"
-import { IoArrowBack, IoMenu } from "react-icons/io5"
+import HeaderComponent from "../../components/HeaderComponent/Header.component"
 
 export default function HomePage() {
 	const { showSidebar, setShowSidebar} =
@@ -21,29 +21,8 @@ export default function HomePage() {
 					setShowSidebar={setShowSidebar}
 
 				/>
-
 				<Container fluid>
-					<Navbar>
-						<div
-							className="conteudo"
-							style={{
-								width: "100%",
-								border: "1px solid black",
-							}}
-						>
-							{showSidebar ? (
-								<i onClick={handleShowSidebar}>
-									<IoArrowBack style={{ fontSize: "1.5rem" }} />
-								</i>
-							) : (
-								<i onClick={handleShowSidebar}>
-									<IoMenu style={{ fontSize: "1.5rem" }} />
-								</i>
-							)}
-
-							<span>LISTAGEM DE PRONTUARIOS</span>
-						</div>
-					</Navbar>
+					<HeaderComponent showSidebar={showSidebar} handleShowSidebar={handleShowSidebar} />
 					<main>Container</main>
 				</Container>
 			</div>
