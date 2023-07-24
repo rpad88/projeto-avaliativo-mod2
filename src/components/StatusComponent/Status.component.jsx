@@ -6,21 +6,21 @@ export default function StatusComponent() {
     <Styled.StatusContainer>
         <Styled.StatusTitle>Estatísticas do Sistema</Styled.StatusTitle>
         <Styled.StatusWrapper>
-            <div>
+            <Styled.StatusCard>
                 <Styled.IconCategory><IoPeopleCircleOutline /></Styled.IconCategory>
                 <Styled.SpanQtd>$qtd</Styled.SpanQtd>
                 <p>Pacientes</p>
-            </div>
-            <div>
+            </Styled.StatusCard>
+            <Styled.StatusCard>
                 <Styled.IconCategory><img src="../../../public/images/stethoscope.png" width={48}/></Styled.IconCategory>
                 <Styled.SpanQtd>$qtd</Styled.SpanQtd>
                 <p>Consultas</p>
-            </div>
-            <div>
+            </Styled.StatusCard>
+            <Styled.StatusCard>
                 <Styled.IconCategory><img src="../../../public/images/examination.png" width={48}/></Styled.IconCategory>
                 <Styled.SpanQtd>$qtd</Styled.SpanQtd>
                 <p>Exames</p>
-            </div>
+            </Styled.StatusCard>
         </Styled.StatusWrapper>
     </Styled.StatusContainer>
   )

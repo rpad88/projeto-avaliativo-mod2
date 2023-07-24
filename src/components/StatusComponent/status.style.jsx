@@ -14,6 +14,15 @@ export const StatusWrapper = styled.div`
     display: flex;
     justify-content: space-around;
 `
+export const StatusCard = styled.div`
+    border: 1px solid #d3d3d3;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+
+    &:hover {
+        box-shadow: 0 0 5px #d3d3d3;
+    }
+`
 
 export const IconCategory = styled.i`
     font-size: 3rem;
