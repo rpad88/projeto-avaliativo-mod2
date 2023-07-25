@@ -26,7 +26,7 @@ export default function HomePage() {
 				<Container fluid>
 					<HeaderComponent showSidebar={showSidebar} handleShowSidebar={handleShowSidebar} title='estatísticas e informações'/>
 					<StatusComponent />
-					<SearchComponent />
+					<SearchComponent title='Informações rápidas de pacientes' placeholder='Digite o nome do paciente' />
 				</Container>
 			</div>
 		</>
