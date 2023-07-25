@@ -38,7 +38,7 @@ export default function LoginComponent() {
 	const onSubmit = async (data) => {
 		const usersFromDb = await CadastroService.VerificaConta()
 
-		const user = usersFromDb.find((u) => u.email === data.email)
+		const user = [usersFromDb].find((u) => u.email === data.email)
 
 		if (!user) {
 			reset()

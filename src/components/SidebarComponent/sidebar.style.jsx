@@ -6,9 +6,9 @@ export const Sidebar = styled.nav`
 	/* padding: .5rem; */
     width: ${({$isOpened}) => {return $isOpened ? '280px': '70px'}};
 	color: #fefefe;
-	/* position: fixed; */
+	/* position: sticky; */
 	inset: 0;
-    /* z-index: 1; */
+    z-index: 0;
 `
 
 export const SidebarBody = styled.div`
@@ -18,9 +18,7 @@ export const SidebarBody = styled.div`
 	flex-direction: column;
     justify-content: space-around;
 	color: #fefefe;
-    border-right: 1px solid #000;
     padding: .5rem;
-
 `
 
 export const SidebarActions = styled.div`

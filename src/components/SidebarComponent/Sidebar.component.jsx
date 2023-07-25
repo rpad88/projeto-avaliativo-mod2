@@ -28,7 +28,7 @@ export default function SidebarComponent({showSidebar}) {
 				<SidebarActions>
 					<TopicWrapper>
 						<small>Geral</small>
-						<button>
+						<button onClick={() => navigate('/home')}>
 							<i>
 								<IoStatsChartOutline />
 							</i>
@@ -48,7 +48,7 @@ export default function SidebarComponent({showSidebar}) {
 					</TopicWrapper>
 					<TopicWrapper>
 						<small>Pacientes</small>
-						<button>
+						<button onClick={() => navigate('/cadpaciente')}>
 							<i>
 								<IoAddSharp />
 							</i>
@@ -67,7 +67,7 @@ export default function SidebarComponent({showSidebar}) {
 					</TopicWrapper>
 					<TopicWrapper>
 						<small>Exames</small>
-						<button>
+						<button onClick={() => navigate('/cadConsulta')}>
 							<i>
 								<IoAddSharp />
 							</i>

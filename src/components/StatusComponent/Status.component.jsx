@@ -12,12 +12,12 @@ export default function StatusComponent() {
                 <p>Pacientes</p>
             </Styled.StatusCard>
             <Styled.StatusCard>
-                <Styled.IconCategory><img src="../../../public/images/stethoscope.png" width={48}/></Styled.IconCategory>
+                <Styled.IconCategory><img src="/images/stethoscope.png" width={48}/></Styled.IconCategory>
                 <Styled.SpanQtd>$qtd</Styled.SpanQtd>
                 <p>Consultas</p>
             </Styled.StatusCard>
             <Styled.StatusCard>
-                <Styled.IconCategory><img src="../../../public/images/examination.png" width={48}/></Styled.IconCategory>
+                <Styled.IconCategory><img src="/images/examination.png" width={48}/></Styled.IconCategory>
                 <Styled.SpanQtd>$qtd</Styled.SpanQtd>
                 <p>Exames</p>
             </Styled.StatusCard>
