@@ -32,13 +32,14 @@ export default function LoginComponent() {
 	const redirectToHome = (user) => {
 		setAuth({ user, isLogged: true })
 		navigate('/home')
-		console.log(user)
+		console.log('user logado', user)
 	}
 
 	const onSubmit = async (data) => {
+		// pega o array de usuários cadastrados
 		const usersFromDb = await CadastroService.VerificaConta()
-
-		const user = [usersFromDb].find((u) => u.email === data.email)
+		console.log(usersFromDb)
+		const user = usersFromDb.find((u) => u.email === data.email)
 
 		if (!user) {
 			reset()

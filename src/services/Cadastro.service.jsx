@@ -56,7 +56,7 @@ const CadastraUser = async (dados) => {
 		// pega o array no banco
 		const arrayDeUsers = await fetch(USERS_URL).then(res => res.json())
 		// verifica se o e-mail já existe
-		const userJaExiste = [arrayDeUsers].find((u) => u.email === dados.email )
+		const userJaExiste = arrayDeUsers.find((u) => u.email === dados.email )
 
 		if(userJaExiste) return alert("Email já cadastrado.")
 
