@@ -24,6 +24,7 @@ export default function CadConsultaPage() {
 					<HeaderComponent
 						showSidebar={showSidebar}
 						handleShowSidebar={handleShowSidebar}
+						title='cadastro de consulta'
 					/>
 					<CadConsultaComponent />
 				</Container>

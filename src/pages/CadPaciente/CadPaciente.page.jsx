@@ -25,6 +25,7 @@ export default function CadPacientePage() {
 					<HeaderComponent
 						showSidebar={showSidebar}
 						handleShowSidebar={handleShowSidebar}
+						title='Cadastro de paciente'
 					/>
 					<CadPacienteComponent />
 				</Container>

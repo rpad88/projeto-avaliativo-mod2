@@ -3,7 +3,7 @@ import * as Styled from "./header.style"
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/Auth.context"
 
-export default function HeaderComponent({ showSidebar, handleShowSidebar }) {
+export default function HeaderComponent({ showSidebar, handleShowSidebar, title }) {
     const {auth} = useContext(AuthContext)
     
 	return (
@@ -19,7 +19,7 @@ export default function HeaderComponent({ showSidebar, handleShowSidebar }) {
 			)}
 
 			<Styled.Conteudo>
-				<Styled.MenuName>listagem de prontuarios</Styled.MenuName>
+				<Styled.MenuName>{title}</Styled.MenuName>
 				<Styled.UserInfo>
 					<span>{auth.user.email}</span>
 					<Styled.Icon>

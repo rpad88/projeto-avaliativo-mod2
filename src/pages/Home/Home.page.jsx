@@ -24,7 +24,7 @@ export default function HomePage() {
 
 				/>
 				<Container fluid>
-					<HeaderComponent showSidebar={showSidebar} handleShowSidebar={handleShowSidebar} />
+					<HeaderComponent showSidebar={showSidebar} handleShowSidebar={handleShowSidebar} title='estatísticas e informações'/>
 					<StatusComponent />
 					<SearchComponent />
 				</Container>
