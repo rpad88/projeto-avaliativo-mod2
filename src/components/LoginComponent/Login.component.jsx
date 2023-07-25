@@ -38,7 +38,7 @@ export default function LoginComponent() {
 	const onSubmit = async (data) => {
 		// pega o array de usuários cadastrados
 		const usersFromDb = await CadastroService.VerificaConta()
-		console.log(usersFromDb)
+
 		const user = usersFromDb.find((u) => u.email === data.email)
 
 		if (!user) {
