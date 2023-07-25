@@ -71,7 +71,6 @@ export default function CadConsultaComponent() {
 
 	return (
 		<>
-			<Container>
 				<Form onSubmit={handleSubmit(submitForm)}>
 					<Legend>Cadastro de Consulta</Legend>
 					<InputGroup>
@@ -172,7 +171,6 @@ export default function CadConsultaComponent() {
 						<BtnDeletar disabled>Deletar</BtnDeletar>
 					</div>
 				</Form>
-			</Container>
 
 			<ModalComponent>
 				<SuccessComponent />
