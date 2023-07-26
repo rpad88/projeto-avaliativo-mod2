@@ -13,7 +13,7 @@ export const Form = styled.form`
 	border: 1px solid ${gray};
 	border-radius: .5rem;
 	box-shadow: 0 0 5px ${gray};
-	margin: 1rem 0;
+	margin: 1rem 1rem;
 
     @media (min-width: 580px) {
         flex-direction: row;
