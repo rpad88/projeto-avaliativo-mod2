@@ -10,7 +10,7 @@ export default function SearchComponent({title, placeholder}) {
 			<Styled.Search>
 				<Styled.SearchWrapper>
                     <i><IoSearchOutline /></i>
-					<Styled.SearchInput placeholder={placeholder}/>
+					<Styled.SearchInput placeholder={placeholder} type="search"/>
 				</Styled.SearchWrapper>
 				<Styled.SearchBtn>Buscar</Styled.SearchBtn>
 			</Styled.Search>
