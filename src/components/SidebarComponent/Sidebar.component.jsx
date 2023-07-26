@@ -75,7 +75,7 @@ export default function SidebarComponent({showSidebar}) {
 							CADASTRAR CONSULTA
 							</span>
 						</button>
-						<button>
+						<button onClick={() => navigate('/cadExame')}>
 							<i>
 								<IoAddSharp />
 							</i>
