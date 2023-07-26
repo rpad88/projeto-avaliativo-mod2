@@ -101,10 +101,10 @@ export const BtnSalvar = styled.button`
 	border: 0;
 	border-radius: .5rem;
 	color: #efefef;
-	background-color: #3C6859;
+	background-color: #198754;
 
 	&:hover{
-		box-shadow: 3px 3px 5px #3C6859;
+		box-shadow: 3px 3px 5px #198754;
 	}
 `
 
@@ -113,10 +113,10 @@ export const BtnEditar =styled.button`
 	border: 0;
 	border-radius: .5rem;
 	color: #efefef;
-	background-color: #36558F;
+	background-color: #0d6efd;
 
 	&:hover{
-		box-shadow: 3px 3px 5px #36558F;
+		box-shadow: 3px 3px 5px #0d6efd;
 	}
 
 	&:disabled {
@@ -130,10 +130,10 @@ export const BtnDeletar = styled.button`
 	border: 0;
 	border-radius: .5rem;
 	color: #efefef;
-	background-color: #48233C;
+	background-color: #dc3545;
 
 	&:hover{
-		box-shadow: 3px 3px 5px #48233C;
+		box-shadow: 3px 3px 5px #dc3545;
 	}
 
 	&:disabled {
