@@ -1,21 +1,10 @@
-import { Container } from "react-bootstrap"
 import { useForm } from "react-hook-form"
-import {
-	BtnDeletar,
-	BtnEditar,
-	BtnSalvar,
-	Form,
-	Input,
-	InputGroup,
-	Label,
-} from "../CadPaciente/CadPaciente.style"
-import { Legend } from "../LoginComponent/loginComponent.style"
 import { useContext, useEffect, useState } from "react"
-import { TextArea } from "./cadConsulta.style"
 import ModalComponent from "../Modal/Modal.component"
 import SuccessComponent from "../Success/Success.component"
 import { AuthContext } from "../../contexts/Auth.context"
 import { ModalContext } from "../../contexts/ModalContext"
+import * as Styled from '../../styles/Form.style'
 
 export default function CadConsultaComponent() {
     // REACT HOOK FORM
@@ -71,11 +60,11 @@ export default function CadConsultaComponent() {
 
 	return (
 		<>
-				<Form onSubmit={handleSubmit(submitForm)}>
-					<Legend>Cadastro de Consulta</Legend>
-					<InputGroup>
-						<Label htmlFor="motivo">Motivo da Consulta</Label>
-						<Input
+				<Styled.Form onSubmit={handleSubmit(submitForm)}>
+					<Styled.Legend>Cadastro de Consulta</Styled.Legend>
+					<Styled.InputGroup>
+						<Styled.Label htmlFor="motivo">Motivo da Consulta</Styled.Label>
+						<Styled.Input
 							name="motivo"
 							placeholder="Informe o motivo da consulta"
 							maxLength={60}
@@ -89,11 +78,11 @@ export default function CadConsultaComponent() {
 							style={{ borderColor: errors.motivo ? "#dc3545" : "" }}
 						/>
 						{errors.motivo && <small>{errors.motivo?.message}</small>}
-					</InputGroup>
+					</Styled.InputGroup>
 					<div style={{ display: "flex", gap: ".5rem" }}>
-						<InputGroup>
-							<Label htmlFor="data">Data</Label>
-							<Input
+						<Styled.InputGroup>
+							<Styled.Label htmlFor="data">Data</Styled.Label>
+							<Styled.Input
 								name="data"
 								type="date"
 								id="date"
@@ -105,10 +94,10 @@ export default function CadConsultaComponent() {
 							/>
 
 							{errors.data && <small>{errors.data?.message}</small>}
-						</InputGroup>
-						<InputGroup>
-							<Label htmlFor="horario">Horário</Label>
-							<Input
+						</Styled.InputGroup>
+						<Styled.InputGroup>
+							<Styled.Label htmlFor="horario">Horário</Styled.Label>
+							<Styled.Input
 								type="time"
 								name="horario"
 								defaultValue={defaultHora}
@@ -121,11 +110,11 @@ export default function CadConsultaComponent() {
 							{errors.horario && (
 								<small>{errors.horario?.message}</small>
 							)}
-						</InputGroup>
+						</Styled.InputGroup>
 					</div>
-					<InputGroup>
-						<Label htmlFor="sintomas">Sintomas</Label>
-						<TextArea
+					<Styled.InputGroup>
+						<Styled.Label htmlFor="sintomas">Sintomas</Styled.Label>
+						<Styled.TextArea
 							name="sintomas"
 							placeholder="Descreva os sintomas"
 							maxLength={1000}
@@ -139,38 +128,38 @@ export default function CadConsultaComponent() {
 							style={{ borderColor: errors.sintomas ? "#dc3545" : "" }}
 						/>
 						{errors.sintomas && <small>{errors.sintomas?.message}</small>}
-					</InputGroup>
-					<InputGroup>
-						<Label htmlFor="medicacao">Medicação prescrita</Label>
-						<Input
+					</Styled.InputGroup>
+					<Styled.InputGroup>
+						<Styled.Label htmlFor="medicacao">Medicação prescrita</Styled.Label>
+						<Styled.Input
 							name="medicacao"
 							placeholder="Informe a medicação prescrita"
 							maxLength={200}
 							{...register("medicacao", { maxLength: 200 })}
-						></Input>
+						></Styled.Input>
 						{errors.medicacao && (
 							<small>Medicação deve ter até 200 caracteres</small>
 						)}
-					</InputGroup>
-					<InputGroup>
-						<Label htmlFor="dosagem">Dosagem e precauções</Label>
-						<TextArea
+					</Styled.InputGroup>
+					<Styled.InputGroup>
+						<Styled.Label htmlFor="dosagem">Dosagem e precauções</Styled.Label>
+						<Styled.TextArea
 							name="dosagem"
 							placeholder="Descreva a dosagem"
 							maxLength={250}
 							minLength={15}
 							{...register("dosagem", { maxLength: 250, minLength: 15 })}
-						></TextArea>
+						></Styled.TextArea>
 						{errors.dosagem && (
 							<small>Dosagem deve ter entre 15 e 250 caracteres</small>
 						)}
-					</InputGroup>
+					</Styled.InputGroup>
 					<div className="actions">
-						<BtnSalvar type="submit">Salvar</BtnSalvar>
-						<BtnEditar disabled>Editar</BtnEditar>
-						<BtnDeletar disabled>Deletar</BtnDeletar>
+						<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
+						<Styled.BtnEditar disabled>Editar</Styled.BtnEditar>
+						<Styled.BtnDeletar disabled>Deletar</Styled.BtnDeletar>
 					</div>
-				</Form>
+				</Styled.Form>
 
 			<ModalComponent>
 				<SuccessComponent />

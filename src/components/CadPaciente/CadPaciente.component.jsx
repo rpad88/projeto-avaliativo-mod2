@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap'
-import * as Styled from './CadPaciente.style'
+import * as Styled from '../../styles/Form.style'
 import { useContext, useRef, useState } from 'react'
 import { CadastroService } from '../../services/Cadastro.service'
 import { useForm } from 'react-hook-form'
@@ -53,10 +53,9 @@ export default function CadPacienteComponent() {
 	return (
 		<>
 			<Container>
-				<h4 style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-					Cadastro de Paciente
-				</h4>
+				
 				<Styled.Form onSubmit={handleSubmit(submitForm)}>
+					<Styled.Legend>Cadastro de paciente</Styled.Legend>
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="nome">Nome completo</Styled.Label>
 						<Styled.Input
