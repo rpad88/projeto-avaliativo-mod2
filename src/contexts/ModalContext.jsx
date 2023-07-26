@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react'
+import PropTypes from 'prop-types'
 
 export const ModalContext = createContext({
 	show: false,
@@ -16,4 +17,8 @@ export const ModalProvider = ({ children }) => {
 			{children}
 		</ModalContext.Provider>
 	)
+}
+
+ModalProvider.propTypes = {
+	children: PropTypes.node
 }
