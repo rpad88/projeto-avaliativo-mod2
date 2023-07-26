@@ -1,13 +1,18 @@
 import styled from "styled-components";
+const green = '#198754'
+const red = '#dc3545'
+const blue = '#0d6efd'
+const gray = '#d3d3d3'
+const textGray = '#efefef'
 
 export const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
 	padding: 1rem;
-	border: 1px solid #d3d3d3;
+	border: 1px solid ${gray};
 	border-radius: .5rem;
-	box-shadow: 0 0 5px #d3d3d3;
+	box-shadow: 0 0 5px ${gray};
 	margin: 1rem 0;
 
     @media (min-width: 580px) {
@@ -44,11 +49,11 @@ export const Form = styled.form`
 	}
 
 	.danger {
-		border-color: #dc3545;
+		border-color: ${red};
 	}
 
 	small {
-		color: #dc3545;
+		color: ${red};
 	}
 ` 
 
@@ -81,10 +86,10 @@ export const Input = styled.input`
 	align-items: flex-start;
 	align-self: stretch;
 	border-radius: 0.5rem;
-	border: 1px solid gray;
-
+	border: 1px solid ${gray};
+	
 	&:disabled {
-		background-color: #d3d3d3;
+		background-color: ${gray};
 	}
 `
 
@@ -94,17 +99,18 @@ export const TextArea = styled.textarea`
     height: 7rem;
     resize: none;
     padding: .5rem;
+	border: 1px solid ${gray};
 `
 
 export const BtnSalvar = styled.button`
 	padding: .5rem 1rem;
 	border: 0;
 	border-radius: .5rem;
-	color: #efefef;
-	background-color: #198754;
+	color: ${textGray};
+	background-color: ${green};
 
 	&:hover{
-		box-shadow: 3px 3px 5px #198754;
+		box-shadow: 3px 3px 5px ${green};
 	}
 `
 
@@ -112,11 +118,11 @@ export const BtnEditar =styled.button`
 	padding: .5rem 1rem;
 	border: 0;
 	border-radius: .5rem;
-	color: #efefef;
-	background-color: #0d6efd;
+	color: ${textGray};
+	background-color: ${blue};
 
 	&:hover{
-		box-shadow: 3px 3px 5px #0d6efd;
+		box-shadow: 3px 3px 5px ${blue};
 	}
 
 	&:disabled {
@@ -129,11 +135,11 @@ export const BtnDeletar = styled.button`
 	padding: .5rem 1rem;
 	border: 0;
 	border-radius: .5rem;
-	color: #efefef;
-	background-color: #dc3545;
+	color: ${textGray};
+	background-color: ${red};
 
 	&:hover{
-		box-shadow: 3px 3px 5px #dc3545;
+		box-shadow: 3px 3px 5px ${red};
 	}
 
 	&:disabled {
