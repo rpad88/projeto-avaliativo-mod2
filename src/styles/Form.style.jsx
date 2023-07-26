@@ -126,7 +126,7 @@ export const BtnEditar =styled.button`
 	}
 
 	&:disabled {
-		opacity: 0.8;
+		opacity: 0.5;
 		cursor: not-allowed;
 	}
 `
@@ -143,7 +143,7 @@ export const BtnDeletar = styled.button`
 	}
 
 	&:disabled {
-		opacity: 0.8;
+		opacity: 0.5;
 		cursor: not-allowed;
 	}
 `
