@@ -71,8 +71,8 @@ export const InputGroup = styled.div`
 export const Label = styled.label`
 	display: flex;
 	align-items: flex-start;
-	gap: 10px;
 	align-self: stretch;
+	font-size: .9rem;
 `
 
 export const Input = styled.input`
