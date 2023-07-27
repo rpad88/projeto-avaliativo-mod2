@@ -3,6 +3,8 @@ import * as Styled from "../LoginComponent/loginComponent.style"
 import { ModalContext } from "../../contexts/ModalContext"
 import { useContext } from "react"
 import { CadastroService } from "../../services/Cadastro.service"
+import PropTypes from 'prop-types'
+
 
 export default function UserRegisterComponent() {
 	const { setShow } = useContext(ModalContext)
@@ -86,4 +88,10 @@ export default function UserRegisterComponent() {
 			</Styled.Button>
 		</Styled.Form>
 	)
+}
+
+UserRegisterComponent.propTypes = {
+	email: PropTypes.string.isRequired,
+	senha: PropTypes.string.isRequired,
+	confirm: PropTypes.string.isRequired
 }

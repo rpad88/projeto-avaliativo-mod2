@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { Row } from 'react-bootstrap'
 import { BsPersonBadge } from 'react-icons/bs'
 import * as Styled from './loginComponent.style'
 import { ModalContext } from '../../contexts/ModalContext'
@@ -9,6 +8,8 @@ import { useForm } from 'react-hook-form'
 import UserRegisterComponent from '../UserRegister/UserRegister.component'
 import { AuthContext } from '../../contexts/Auth.context'
 import { CadastroService } from '../../services/Cadastro.service'
+import PropTypes from 'prop-types'
+
 
 export default function LoginComponent() {
 	const { setShow } = useContext(ModalContext)
@@ -106,4 +107,10 @@ export default function LoginComponent() {
 			</ModalComponent>
 		</>
 	)
+}
+
+
+LoginComponent.propTypes = {
+	email: PropTypes.string.isRequired,
+	senha: PropTypes.string.isRequired
 }
