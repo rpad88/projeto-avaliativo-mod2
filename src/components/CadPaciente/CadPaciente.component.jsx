@@ -25,11 +25,11 @@ export default function CadPacienteComponent() {
 	const { setShow } = useContext(ModalContext)
 
 
-	const submitForm = (data) => {
+	const submitForm = async (data) => {
 		// console.table(data)
 		if (errors.logradouro || errors.cidade)
 			return alert('você deve inserir um CEP válido')
-		const ok = CadastroService.CadastraPaciente(data)
+		const ok = await CadastroService.CadastraPaciente(data)
 		if(ok) setShow(true) //Abre a animação confirmando o cadastro.
 		reset() //Limpa os inputs
 	}

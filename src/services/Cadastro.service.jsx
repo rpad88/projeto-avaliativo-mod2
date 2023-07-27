@@ -13,9 +13,16 @@ const GetEndereco = async (cep) => {
 const PACIENTES_URL = 'http://localhost:3000/pacientes'
 const USERS_URL = 'http://localhost:3000/users'
 
+
+// ***** PACIENTES *****
 // PUT
 const CadastraPaciente = async (dadosDoForm) => {
 	try {
+		if(PacienteExists){
+			alert("paciente ja cadastrado")
+			return false
+		}
+
 		const paciente = {
 			method: 'POST',
 			headers: {
@@ -38,6 +45,19 @@ const CadastraPaciente = async (dadosDoForm) => {
 	}
 }
 
+// VERIFICA SE O PACIENTE JÁ EXISTE
+const PacienteExists = async (dadosDoForm) => {
+	try {
+		const arrayDePacientes = await fetch(PACIENTES_URL).then((res) => {
+			return res.json()
+		})
+		// some = alternativa ao find, retorna true assim que encontrar 1 opção correspondente.
+		return arrayDePacientes.some(p => p.cpf === dadosDoForm.cpf)
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
 // GET | User LOGIN
 const VerificaConta = async () => {
 	try {
@@ -49,6 +69,8 @@ const VerificaConta = async () => {
 		console.error(error.message)
 	}
 }
+
+// -------------------------------------
 
 // POST | Cadastro de usuário
 const CadastraUser = async (dados) => {
