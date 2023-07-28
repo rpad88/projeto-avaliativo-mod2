@@ -10,6 +10,8 @@ import { Sidebar, SidebarActions, SidebarBody, TopicWrapper } from "./sidebar.st
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/Auth.context"
 import { useNavigate } from "react-router-dom"
+import LabMedicalLogo from '/images/LABMedical_Logo.png'
+
 
 export default function SidebarComponent({showSidebar}) {
 	const navigate = useNavigate()
@@ -23,7 +25,7 @@ export default function SidebarComponent({showSidebar}) {
 		<Sidebar show={showSidebar} $isOpened={showSidebar}>
 			<SidebarBody>
 				<div className="img-wrapper">
-					<Image src="../../public/images/LABMedical_logo.png" fluid></Image>
+					<Image src={LabMedicalLogo} fluid></Image>
 				</div>
 				<SidebarActions>
 					<TopicWrapper>
