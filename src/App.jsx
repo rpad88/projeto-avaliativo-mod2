@@ -7,7 +7,7 @@ import PublicRoutes from "./routes/PublicRoutes"
 function App() {
 	const { auth } = useContext(AuthContext)
 
-	return auth ? <PrivateRoutes /> : <PublicRoutes />
+	return auth.isLogged ? <PrivateRoutes /> : <PublicRoutes />
 }
 
 export default App

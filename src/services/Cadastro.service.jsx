@@ -1,3 +1,16 @@
+// LOCAL STORAGE
+const localStorageKey = 'lab365:users'
+const GetOnLocalStorage = () => {
+	return JSON.parse(localStorage.getItem(localStorageKey)) || []
+}
+const SaveOnLocalStorage = (user) => {
+	const storage = GetOnLocalStorage()
+	storage.push(user)
+	localStorage.setItem(localStorageKey, JSON.stringify(storage))
+}
+
+// ----- END OF LOCAL STORAGE -----
+
 const GetEndereco = async (cep) => {
 	const url = `http://viacep.com.br/ws/${cep}/json/`
 	try {

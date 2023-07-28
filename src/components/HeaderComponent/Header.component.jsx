@@ -21,7 +21,7 @@ export default function HeaderComponent({ showSidebar, handleShowSidebar, title 
 			<Styled.Conteudo>
 				<Styled.MenuName>{title}</Styled.MenuName>
 				<Styled.UserInfo>
-					<span>{auth.user.email}</span>
+					<span>{auth.email}</span>
 					<Styled.Icon>
 						<IoPersonCircleOutline />
 					</Styled.Icon>

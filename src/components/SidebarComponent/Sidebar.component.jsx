@@ -1,4 +1,4 @@
-import { Form, Image } from "react-bootstrap"
+import { Image } from "react-bootstrap"
 import "./sidebar.style.css"
 import {
 	IoStatsChartOutline,
@@ -13,9 +13,9 @@ import { useNavigate } from "react-router-dom"
 
 export default function SidebarComponent({showSidebar}) {
 	const navigate = useNavigate()
-	const {auth, setAuth} = useContext(AuthContext)
+	const { LogOut} = useContext(AuthContext)
 	const handleSair = () => {
-		setAuth(!auth)
+		LogOut()
 		navigate('/')
 	}
 

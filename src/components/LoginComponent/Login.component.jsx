@@ -14,7 +14,7 @@ import PropTypes from 'prop-types'
 export default function LoginComponent() {
 	const { setShow } = useContext(ModalContext)
 	const navigate = useNavigate()
-	const { setAuth } = useContext(AuthContext)
+	const { LogIn } = useContext(AuthContext)
 
 	const {
 		register,
@@ -31,9 +31,11 @@ export default function LoginComponent() {
 	}
 
 	const redirectToHome = (user) => {
-		setAuth({ user, isLogged: true })
+		// transforma o usuário em um novo objeto com a propriedade isLogged
+		const userToLogin = {...user, isLogged: true}
+		LogIn(userToLogin)
 		navigate('/home')
-		console.log('user logado', user)
+		// console.log('user logado', user)
 	}
 
 	const onSubmit = async (data) => {
