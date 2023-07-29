@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form"
 import * as Styled from "../../styles/Form.style"
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../../contexts/Auth.context"
+import { CadastroService } from "../../services/Cadastro.service"
+import { ModalContext } from "../../contexts/ModalContext"
 
 export default function CadExameComponent({paciente}) {
 	const {
@@ -12,7 +14,9 @@ export default function CadExameComponent({paciente}) {
 		formState: { errors },
 	} = useForm()
 
+	// contexts
 	const { auth } = useContext(AuthContext)
+	const { setShow } = useContext(ModalContext)
 
 	// puxa a data atual do sistema
 	const handleDate = () => {
@@ -38,7 +42,9 @@ export default function CadExameComponent({paciente}) {
 
   const submitForm = async (data) => {
     	const newObj = {...data, idMedico: auth.id, idPaciente: paciente.id}
-		console.log(newObj)
+		const ok = await CadastroService.CadastraExame(newObj)
+		if(ok) setShow(true)
+		reset()
   }
 
 	return (

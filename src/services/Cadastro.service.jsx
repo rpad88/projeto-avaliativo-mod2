@@ -28,6 +28,7 @@ const GetEndereco = async (cep) => {
 const PACIENTES_URL = "http://localhost:3000/pacientes"
 const USERS_URL = "http://localhost:3000/users"
 const CONSULTAS_URL = "http://localhost:3000/consultas"
+const EXAMES_URL = "http://localhost:3000/exames"
 
 // ***** PACIENTES *****
 
@@ -135,8 +136,8 @@ const CadastraConsulta = async (dados) => {
 		}
 
 		const status = await fetch(CONSULTAS_URL, novaConsulta).then((data) => {
-			if(!data.ok) throw Error(data.status)
-			console.info('Consulta cadastrada')
+			if (!data.ok) throw Error(data.status)
+			console.info("Consulta cadastrada")
 			return true
 		})
 		return status
@@ -147,8 +148,32 @@ const CadastraConsulta = async (dados) => {
 
 const BuscaTodasConsultas = async (dados) => {
 	try {
-		const arrayConsultas = await fetch(CONSULTAS_URL).then(res => res.json())
+		const arrayConsultas = await fetch(CONSULTAS_URL).then((res) =>
+			res.json()
+		)
 		return arrayConsultas
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+// ***** EXAMES *****
+const CadastraExame = async (dados) => {
+	try {
+		const novoExame = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dados),
+		}
+
+		const status = await fetch(EXAMES_URL, novoExame).then((data) => {
+			if (!data.ok) throw Error(data.status)
+			// console.info("Exame cadastrado")
+			return true
+		})
+		return status
 	} catch (error) {
 		console.error(error.message)
 	}
@@ -163,4 +188,5 @@ export const CadastroService = {
 	BuscaTodosPacientes,
 	CadastraConsulta,
 	BuscaTodasConsultas,
+	CadastraExame,
 }

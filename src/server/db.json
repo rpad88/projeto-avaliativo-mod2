@@ -117,5 +117,18 @@
       "idPaciente": 3,
       "id": 2
     }
+  ],
+  "exames": [
+    {
+      "nome": "hemograma completo",
+      "data": "2023-07-29",
+      "hora": "16:20",
+      "tipo": "sanguineo",
+      "lab": "hemaclin",
+      "resultado": "o exame apresentou leves alterações no colesterol",
+      "idMedico": 1,
+      "idPaciente": 2,
+      "id": 1
+    }
   ]
 }
