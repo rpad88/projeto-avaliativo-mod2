@@ -7,7 +7,7 @@ import { ModalContext } from "../../contexts/ModalContext"
 import * as Styled from "../../styles/Form.style"
 import { CadastroService } from "../../services/Cadastro.service"
 
-export default function CadConsultaComponent() {
+export default function CadConsultaComponent({ paciente }) {
 	// REACT HOOK FORM
 	const {
 		register,
@@ -44,16 +44,21 @@ export default function CadConsultaComponent() {
 	}, [])
 
 	const submitForm = async (data) => {
-		const newObject = { ...data, IdMedico: auth.id }
-		const ok = await CadastroService.CadastraConsulta(data)
-		if(ok) setShow(true)
+		const newObject = { ...data, IdMedico: auth.id, idPaciente: paciente.id }
+		const ok = await CadastroService.CadastraConsulta(newObject)
+		if (ok) setShow(true)
 		reset()
 	}
 
 	return (
 		<>
 			<Styled.Form onSubmit={handleSubmit(submitForm)}>
-				<Styled.Legend>Cadastro de Consulta</Styled.Legend>
+				<Styled.Legend>
+					Consulta de{" "}
+					<span style={{ color: "rgb(56, 107, 201)" }}>
+						{paciente.nome || "..."}
+					</span>
+				</Styled.Legend>
 				<Styled.InputGroup>
 					<Styled.Label htmlFor="motivo">Motivo da Consulta</Styled.Label>
 					<Styled.Input

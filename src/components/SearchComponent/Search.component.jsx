@@ -3,18 +3,18 @@ import * as Styled from "./search.style"
 import { useEffect, useState } from "react"
 import { CadastroService } from "../../services/Cadastro.service"
 
-export default function SearchComponent({ title, placeholder }) {
-	const [arrayPacientes, setArrayPacientes] = useState("")
+export default function SearchComponent({ title, placeholder, setPaciente }) {
+	// const [arrayPacientes, setArrayPacientes] = useState("")
 	const [input, setInput] = useState("")
 	const [results, setResults] = useState([])
 
-	useEffect(() => {
-		async function pegaPacientes() {
-			const array = await CadastroService.BuscaTodosPacientes()
-			setArrayPacientes(array)
-		}
-		pegaPacientes()
-	})
+	// useEffect(() => {
+	// 	async function pegaPacientes() {
+	// 		const array = await CadastroService.BuscaTodosPacientes()
+	// 		setArrayPacientes(array)
+	// 	}
+	// 	pegaPacientes()
+	// })
 
 	const handleSearch = (value) => {
 		fetch("http://localhost:3000/pacientes")
@@ -23,9 +23,7 @@ export default function SearchComponent({ title, placeholder }) {
 				const res = json.filter((paciente) => {
 					return (
 						value &&
-						paciente &&
-						paciente.nome &&
-						paciente.nome.toLowerCase().includes(value)
+						paciente.nome.toLowerCase().includes(value) || paciente.id == value
 					)
 				})
 				setResults(res)
@@ -36,6 +34,11 @@ export default function SearchComponent({ title, placeholder }) {
 	const handleChange = (value) => {
 		handleSearch(value)
 		setInput(value)
+	}
+
+	const handlePaciente = (paciente) => {
+		setPaciente(paciente)
+		setInput('')
 	}
 
 	return (
@@ -50,6 +53,7 @@ export default function SearchComponent({ title, placeholder }) {
 						<Styled.SearchInput
 							placeholder={placeholder}
 							type="search"
+							value={input}
 							onChange={(e) => handleChange(e.target.value)}
 						/>
 					</Styled.SearchWrapper>
@@ -60,8 +64,8 @@ export default function SearchComponent({ title, placeholder }) {
 				{input && (
 					<Styled.Ul>
 						{
-							results.map((paciente) => {
-								return <li onClick={() =>console.log(paciente.id)} key={paciente.id}>{paciente.nome}</li>
+							results.map((p) => {
+								return <li onClick={() =>handlePaciente(p)} key={p.id}>{p.nome}</li>
 							})
 						}
 					</Styled.Ul>

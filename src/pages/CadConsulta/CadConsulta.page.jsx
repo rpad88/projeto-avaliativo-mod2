@@ -3,12 +3,13 @@ import CadConsultaComponent from "../../components/CadConsulta/CadConsulta.compo
 import SidebarComponent from "../../components/SidebarComponent/Sidebar.component"
 import { PacienteContainer } from "../CadPaciente/cadPaciente.style"
 import HeaderComponent from "../../components/HeaderComponent/Header.component"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { SidebarContext } from "../../contexts/SidebarContext"
 import SearchComponent from "../../components/SearchComponent/Search.component"
 
 export default function CadConsultaPage() {
 	const { showSidebar, setShowSidebar } = useContext(SidebarContext)
+	const [paciente, setPaciente] = useState({})
 
 	const handleShowSidebar = () => {
 		setShowSidebar(!showSidebar)
@@ -31,8 +32,9 @@ export default function CadConsultaPage() {
 						<SearchComponent
 							title="encontre o paciente"
 							placeholder="Digite o nome do paciente"
+							setPaciente={setPaciente}
 						/>
-						<CadConsultaComponent />
+						<CadConsultaComponent paciente={paciente} />
 					</Container>
 				</Container>
 			</PacienteContainer>

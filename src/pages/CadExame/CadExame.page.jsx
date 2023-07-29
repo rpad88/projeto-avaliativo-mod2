@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import CadExameComponent from "../../components/CadExame/CadExame.component"
 import { SidebarContext } from "../../contexts/SidebarContext"
 import SidebarComponent from "../../components/SidebarComponent/Sidebar.component"
@@ -9,6 +9,7 @@ import { PacienteContainer } from "../CadPaciente/cadPaciente.style"
 
 export default function CadExamePage() {
 	const { showSidebar, setShowSidebar } = useContext(SidebarContext)
+	const [ paciente, setPaciente ] = useState({})
 
 	const handleShowSidebar = () => {
 		setShowSidebar(!showSidebar)
@@ -32,9 +33,10 @@ export default function CadExamePage() {
 					<SearchComponent
 						title="encontre o paciente"
 						placeholder="Digite o nome do paciente"
+						setPaciente={setPaciente}
 					/>
 
-					<CadExameComponent />
+					<CadExameComponent paciente={paciente} />
 				</Container>
 			</Container>
 		</PacienteContainer>

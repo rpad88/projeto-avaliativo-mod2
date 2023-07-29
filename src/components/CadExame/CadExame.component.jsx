@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form"
 import * as Styled from "../../styles/Form.style"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
+import { AuthContext } from "../../contexts/Auth.context"
 
-export default function CadExameComponent() {
+export default function CadExameComponent({paciente}) {
 	const {
 		register,
 		handleSubmit,
@@ -10,6 +11,8 @@ export default function CadExameComponent() {
     	setValue,
 		formState: { errors },
 	} = useForm()
+
+	const { auth } = useContext(AuthContext)
 
 	// puxa a data atual do sistema
 	const handleDate = () => {
@@ -33,8 +36,9 @@ export default function CadExameComponent() {
 		handleTime()
 	}, [])
 
-  const submitForm = (data) => {
-    console.log(data)
+  const submitForm = async (data) => {
+    	const newObj = {...data, idMedico: auth.id, idPaciente: paciente.id}
+		console.log(newObj)
   }
 
 	return (
@@ -49,7 +53,7 @@ export default function CadExameComponent() {
 					}}
 				>
 					<Styled.Legend style={{ textAlign: "initial" }}>
-						exame de $paciente.nome
+						exame de <span style={{color: 'rgb(56, 107, 201)'}}>{paciente.nome || '...'}</span>
 					</Styled.Legend>
 					<div style={{ display: "flex", gap: ".5rem" }}>
 						<Styled.BtnEditar disabled>Editar</Styled.BtnEditar>

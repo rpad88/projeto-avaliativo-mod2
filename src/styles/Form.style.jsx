@@ -59,6 +59,8 @@ export const Form = styled.form`
 
 export const Legend = styled.legend`
 	text-align: center;
+	text-transform: uppercase;
+	font-size: 1.2rem;
 `
 
 export const InputGroup = styled.div`

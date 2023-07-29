@@ -99,12 +99,23 @@
   "consultas": [
     {
       "motivo": "dor de cabeça",
-      "data": "2023-07-28",
-      "horario": "22:54",
-      "sintomas": "paciente reclama de dores de cabeca",
+      "data": "2023-07-29",
+      "horario": "16:00",
+      "sintomas": "o paciente reclama de dores de cabeça",
       "medicacao": "paracetamol",
       "dosagem": "1 comprimido de 8 em 8",
       "id": 1
+    },
+    {
+      "motivo": "dor de cabeça",
+      "data": "2023-07-29",
+      "horario": "16:02",
+      "sintomas": "paciente se queixa de cefaleia",
+      "medicacao": "paracetamol",
+      "dosagem": "tomar um comprimido quando sentir dores",
+      "IdMedico": 1,
+      "idPaciente": 3,
+      "id": 2
     }
   ]
 }
