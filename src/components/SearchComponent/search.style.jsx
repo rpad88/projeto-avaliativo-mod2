@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const SearchContainer = styled.div`
 	padding: 1rem;
+	position: relative;
 `
 
 export const SearchTitle = styled.h5`
@@ -42,5 +43,28 @@ export const SearchBtn = styled.button`
 
 	&:hover {
 		box-shadow: 0 0 5px #256EFF
+	}
+`
+
+export const Ul = styled.ul`
+	width: 90%;
+	padding: 1rem;
+	background-color: #fefefe;
+	border-radius: .5rem;
+	position: absolute;
+	list-style-type: none;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	border: 1px solid #d3d3d3;
+	z-index: 1;
+	
+	li {
+		color: #000;
+		border-radius: 5px;
+		padding: 5px;
+
+		&:hover {
+			background-color: #d3d3d3;
+			cursor: pointer;
+		}
 	}
 `
