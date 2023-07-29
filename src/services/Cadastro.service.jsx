@@ -11,6 +11,7 @@ const SaveOnLocalStorage = (user) => {
 
 // ----- END OF LOCAL STORAGE -----
 
+// API VIACEP
 const GetEndereco = async (cep) => {
 	const url = `http://viacep.com.br/ws/${cep}/json/`
 	try {
@@ -21,12 +22,26 @@ const GetEndereco = async (cep) => {
 		console.error(error.message)
 	}
 }
+// ----- END OF API VIACEP -----
 
 // JSON SERVER
 const PACIENTES_URL = "http://localhost:3000/pacientes"
 const USERS_URL = "http://localhost:3000/users"
 
 // ***** PACIENTES *****
+
+// GET
+const BuscaTodosPacientes = async () => {
+	try {
+		const arrayDePacientes = await fetch(PACIENTES_URL).then((res) => {
+			return res.json()
+		})
+		return arrayDePacientes
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
 // PUT
 const CadastraPaciente = async (dadosDoForm) => {
 	try {
@@ -114,4 +129,5 @@ export const CadastroService = {
 	VerificaConta,
 	CadastraUser,
 	PacienteExists,
+	BuscaTodosPacientes,
 }
