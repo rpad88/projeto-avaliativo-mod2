@@ -13,7 +13,11 @@ export default function CadExameComponent() {
 
 	// puxa a data atual do sistema
 	const handleDate = () => {
-    const hoje = new Date().toISOString().slice(0,10)
+		const year = new Date().getFullYear()
+		const month = new Date().toLocaleString('default', {month: '2-digit'})
+		const day = new Date().toLocaleString('default', {day: '2-digit'})
+
+		const hoje = `${year}-${month}-${day}`
 		setValue('data', hoje)
 	}
 

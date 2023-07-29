@@ -24,7 +24,11 @@ export default function CadConsultaComponent() {
 
 	// puxa a data atual do sistema
 	const handleDate = () => {
-		const hoje = new Date().toISOString().slice(0,10)
+		const year = new Date().getFullYear()
+		const month = new Date().toLocaleString('default', {month: '2-digit'})
+		const day = new Date().toLocaleString('default', {day: '2-digit'})
+
+		const hoje = `${year}-${month}-${day}`
 		setDefaultDate(hoje)
 	}
 
@@ -42,7 +46,7 @@ export default function CadConsultaComponent() {
 
 	const submitForm = (data) => {
 		console.log(auth)
-		const newObject = { ...data, IdPaciente: auth.user.id }
+		const newObject = { ...data, IdPaciente: auth.id }
 		console.log(newObject)
 		setShow(true)
 	}
