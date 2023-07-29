@@ -57,7 +57,7 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 							onChange={(e) => handleChange(e.target.value)}
 						/>
 					</Styled.SearchWrapper>
-					<Styled.SearchBtn onClick={handleSearch}>
+					<Styled.SearchBtn onClick={() => handleSearch(input)}>
 						Buscar
 					</Styled.SearchBtn>
 				</Styled.Search>
