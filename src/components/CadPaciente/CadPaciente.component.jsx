@@ -15,10 +15,6 @@ export default function CadPacienteComponent() {
 		reset,
 		formState: { errors },
 	} = useForm()
-	const cidadeRef = useRef()
-	const estadoRef = useRef()
-	const ruaRef = useRef()
-	const bairroRef = useRef()
 	const cepRef = useRef()
 
 	// variável para chamar a animação
@@ -29,8 +25,15 @@ export default function CadPacienteComponent() {
 		// console.table(data)
 		if (errors.logradouro || errors.cidade)
 			return alert('você deve inserir um CEP válido')
+
+		//verifica se o CPF já existe no banco
+		const exists = await CadastroService.PacienteExists(data.cpf)
+		if(exists) return alert('Paciente já cadastrado')	
+
 		const ok = await CadastroService.CadastraPaciente(data)
-		if(ok) setShow(true) //Abre a animação confirmando o cadastro.
+		console.log(ok)
+		//Abre a animação confirmando o cadastro.
+		if(ok) setShow(true)
 		reset() //Limpa os inputs
 	}
 
@@ -273,9 +276,7 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="estado"
-									ref={estadoRef}
 									readOnly
-									value={''}
 									{...register('estado')}
 									className={errors.estado && 'danger'}
 								/>
@@ -285,8 +286,6 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="cidade"
-									ref={cidadeRef}
-									value={''}
 									readOnly
 									{...register('cidade')}
 									className={errors.cidade && 'danger'}
@@ -299,8 +298,6 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="rua"
-									ref={ruaRef}
-									value={''}
 									readOnly
 									{...register('rua')}
 								/>
@@ -310,7 +307,6 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="bairro"
-									ref={bairroRef}
 									readOnly
 									{...register('bairro')}
 								/>
