@@ -179,6 +179,15 @@ const CadastraExame = async (dados) => {
 	}
 }
 
+const BuscaTodosExames = async () => {
+	try {
+		const arrayExames = await fetch(EXAMES_URL).then((res) => res.json())
+		return arrayExames
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
 export const CadastroService = {
 	GetEndereco,
 	CadastraPaciente,
@@ -189,4 +198,5 @@ export const CadastroService = {
 	CadastraConsulta,
 	BuscaTodasConsultas,
 	CadastraExame,
+	BuscaTodosExames,
 }

@@ -6,6 +6,7 @@ import { CadastroService } from "../../services/Cadastro.service"
 export default function StatusComponent() {
 	const [totalPacientes, setTotalPacientes] = useState(0)
 	const [totalConsultas, setTotalConsultas] = useState(0)
+	const [totalExames, setTotalExames] = useState(0)
 
 	useEffect(() => {
 		async function pegaDados() {
@@ -14,6 +15,9 @@ export default function StatusComponent() {
 
             const arrayConsultas = await CadastroService.BuscaTodasConsultas()
             setTotalConsultas(arrayConsultas.length)
+
+			const arrayExames = await CadastroService.BuscaTodosExames()
+			setTotalExames(arrayExames.length)
 		}
 		pegaDados()
 	})
@@ -45,7 +49,7 @@ export default function StatusComponent() {
 						<Styled.IconCategory>
 							<img src="/images/examination.png" width={48} />
 						</Styled.IconCategory>
-						<Styled.SpanQtd>$qtd</Styled.SpanQtd>
+						<Styled.SpanQtd>{totalExames}</Styled.SpanQtd>
 					</div>
 					<p>Exames</p>
 				</Styled.StatusCard>
