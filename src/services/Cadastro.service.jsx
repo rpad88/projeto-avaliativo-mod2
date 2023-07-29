@@ -27,6 +27,7 @@ const GetEndereco = async (cep) => {
 // JSON SERVER
 const PACIENTES_URL = "http://localhost:3000/pacientes"
 const USERS_URL = "http://localhost:3000/users"
+const CONSULTAS_URL = "http://localhost:3000/consultas"
 
 // ***** PACIENTES *****
 
@@ -92,7 +93,6 @@ const VerificaConta = async () => {
 		console.error(error.message)
 	}
 }
-
 // -------------------------------------
 
 // POST | Cadastro de usuário
@@ -123,6 +123,37 @@ const CadastraUser = async (dados) => {
 
 const BuscaUser = async (dados) => {}
 
+// ***** CONSULTAS *****
+const CadastraConsulta = async (dados) => {
+	try {
+		const novaConsulta = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dados),
+		}
+
+		const status = await fetch(CONSULTAS_URL, novaConsulta).then((data) => {
+			if(!data.ok) throw Error(data.status)
+			console.info('Consulta cadastrada')
+			return true
+		})
+		return status
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const BuscaTodasConsultas = async (dados) => {
+	try {
+		const arrayConsultas = await fetch(CONSULTAS_URL).then(res => res.json())
+		return arrayConsultas
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
 export const CadastroService = {
 	GetEndereco,
 	CadastraPaciente,
@@ -130,4 +161,6 @@ export const CadastroService = {
 	CadastraUser,
 	PacienteExists,
 	BuscaTodosPacientes,
+	CadastraConsulta,
+	BuscaTodasConsultas,
 }

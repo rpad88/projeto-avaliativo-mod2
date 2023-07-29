@@ -7,7 +7,7 @@ export default function CadExameComponent() {
 		register,
 		handleSubmit,
 		reset,
-    setValue,
+    	setValue,
 		formState: { errors },
 	} = useForm()
 

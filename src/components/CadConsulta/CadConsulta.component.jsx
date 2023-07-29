@@ -5,6 +5,7 @@ import SuccessComponent from "../Success/Success.component"
 import { AuthContext } from "../../contexts/Auth.context"
 import { ModalContext } from "../../contexts/ModalContext"
 import * as Styled from "../../styles/Form.style"
+import { CadastroService } from "../../services/Cadastro.service"
 
 export default function CadConsultaComponent() {
 	// REACT HOOK FORM
@@ -12,11 +13,9 @@ export default function CadConsultaComponent() {
 		register,
 		handleSubmit,
 		reset,
+		setValue,
 		formState: { errors },
 	} = useForm()
-
-	const [defaultDate, setDefaultDate] = useState()
-	const [defaultHora, setDefaultHora] = useState()
 
 	// CONTEXTS
 	const { auth } = useContext(AuthContext)
@@ -25,17 +24,17 @@ export default function CadConsultaComponent() {
 	// puxa a data atual do sistema
 	const handleDate = () => {
 		const year = new Date().getFullYear()
-		const month = new Date().toLocaleString('default', {month: '2-digit'})
-		const day = new Date().toLocaleString('default', {day: '2-digit'})
+		const month = new Date().toLocaleString("default", { month: "2-digit" })
+		const day = new Date().toLocaleString("default", { day: "2-digit" })
 
 		const hoje = `${year}-${month}-${day}`
-		setDefaultDate(hoje)
+		setValue("data", hoje)
 	}
 
 	// puxa a data atual do sistema
 	const handleTime = () => {
-		const horario = new Date().toLocaleTimeString().slice(0,5)
-		setDefaultHora(horario)
+		const horario = new Date().toLocaleTimeString().slice(0, 5)
+		setValue("horario", horario)
 	}
 
 	// aplica data e hora do sistema nos campos
@@ -44,11 +43,11 @@ export default function CadConsultaComponent() {
 		handleTime()
 	}, [])
 
-	const submitForm = (data) => {
-		console.log(auth)
-		const newObject = { ...data, IdPaciente: auth.id }
-		console.log(newObject)
-		setShow(true)
+	const submitForm = async (data) => {
+		const newObject = { ...data, IdMedico: auth.id }
+		const ok = await CadastroService.CadastraConsulta(data)
+		if(ok) setShow(true)
+		reset()
 	}
 
 	return (
@@ -79,7 +78,6 @@ export default function CadConsultaComponent() {
 							name="data"
 							type="date"
 							id="date"
-							defaultValue={defaultDate}
 							{...register("data", {
 								required: "data é obrigatório",
 							})}
@@ -93,7 +91,6 @@ export default function CadConsultaComponent() {
 						<Styled.Input
 							type="time"
 							name="horario"
-							defaultValue={defaultHora}
 							{...register("horario", {
 								required: "horário obrigatório",
 							})}
