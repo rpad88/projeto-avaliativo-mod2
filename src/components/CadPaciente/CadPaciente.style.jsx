@@ -131,6 +131,7 @@ export const BtnDeletar = styled.button`
 
 	&:disabled {
 		opacity: 0.8;
+		cursor: not-allowed;
 	}
 `
 
@@ -147,5 +148,6 @@ export const BtnEditar =styled.button`
 
 	&:disabled {
 		opacity: 0.8;
+		cursor: not-allowed;
 	}
 `

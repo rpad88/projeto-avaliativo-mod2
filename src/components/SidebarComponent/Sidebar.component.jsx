@@ -1,4 +1,4 @@
-import { Form, Image } from "react-bootstrap"
+import { Image } from "react-bootstrap"
 import "./sidebar.style.css"
 import {
 	IoStatsChartOutline,
@@ -7,19 +7,30 @@ import {
 	IoList,
 } from "react-icons/io5"
 import { Sidebar, SidebarActions, SidebarBody, TopicWrapper } from "./sidebar.style"
+import { useContext } from "react"
+import { AuthContext } from "../../contexts/Auth.context"
+import { useNavigate } from "react-router-dom"
+import LabMedicalLogo from '/images/LABMedical_Logo.png'
+
 
 export default function SidebarComponent({showSidebar}) {
+	const navigate = useNavigate()
+	const { LogOut} = useContext(AuthContext)
+	const handleSair = () => {
+		LogOut()
+		navigate('/')
+	}
 
 	return (
 		<Sidebar show={showSidebar} $isOpened={showSidebar}>
 			<SidebarBody>
 				<div className="img-wrapper">
-					<Image src="../../public/images/LABMedical_logo.png" fluid></Image>
+					<Image src={LabMedicalLogo} fluid></Image>
 				</div>
 				<SidebarActions>
 					<TopicWrapper>
 						<small>Geral</small>
-						<button>
+						<button onClick={() => navigate('/home')}>
 							<i>
 								<IoStatsChartOutline />
 							</i>
@@ -27,18 +38,19 @@ export default function SidebarComponent({showSidebar}) {
 							INICIO
 							</span>
 						</button>
-						<button>
+						<button onClick={handleSair}>
 							<i>
 								<IoExitOutline />
 							</i>
 							<span style={{display: showSidebar? "": "none"}}>
 							SAIR
 							</span>
+							
 						</button>
 					</TopicWrapper>
 					<TopicWrapper>
 						<small>Pacientes</small>
-						<button>
+						<button onClick={() => navigate('/cadpaciente')}>
 							<i>
 								<IoAddSharp />
 							</i>
@@ -57,7 +69,7 @@ export default function SidebarComponent({showSidebar}) {
 					</TopicWrapper>
 					<TopicWrapper>
 						<small>Exames</small>
-						<button>
+						<button onClick={() => navigate('/cadConsulta')}>
 							<i>
 								<IoAddSharp />
 							</i>
@@ -65,7 +77,7 @@ export default function SidebarComponent({showSidebar}) {
 							CADASTRAR CONSULTA
 							</span>
 						</button>
-						<button>
+						<button onClick={() => navigate('/cadExame')}>
 							<i>
 								<IoAddSharp />
 							</i>

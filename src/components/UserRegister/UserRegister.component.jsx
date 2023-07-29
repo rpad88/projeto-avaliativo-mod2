@@ -3,6 +3,8 @@ import * as Styled from "../LoginComponent/loginComponent.style"
 import { ModalContext } from "../../contexts/ModalContext"
 import { useContext } from "react"
 import { CadastroService } from "../../services/Cadastro.service"
+import PropTypes from 'prop-types'
+
 
 export default function UserRegisterComponent() {
 	const { setShow } = useContext(ModalContext)
@@ -10,14 +12,19 @@ export default function UserRegisterComponent() {
 	// FUNÇÕES
 	const {
 		register,
+		unregister,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm()
 
 	const onSubmit = async (data) => {
-		await CadastroService.CadastraUser(data)
-
-		setShow(false)
+		try {
+			await CadastroService.CadastraUser(data)
+			setShow(false)
+		} catch (error) {
+			console.log(error.message)
+		}
 	}
 
 	// O QUE SERÁ RENDERIZADO
@@ -59,11 +66,14 @@ export default function UserRegisterComponent() {
 					name="confirm"
 					type="password"
 					placeholder="Confirme sua senha"
-					{...register("confirm", { required: true, minLength: 9 })}
+					{...register("confirm", { required: true, minLength: 9 ,validate: (value) => {
+						const pwd = watch('password')
+						if(value != pwd) return "A confirmação de senha deve ser igual a senha"
+					}})}
 				/>
 				{errors.confirm && (
 					<small style={{ color: "red" }}>
-						Confirmação de senha deve ser igual a senha
+						{errors.confirm.message}
 					</small>
 				)}
 			</Styled.InputGroup>
@@ -72,9 +82,16 @@ export default function UserRegisterComponent() {
 					errors.email || errors.password || errors.confirm ? false : true
 				}
 				type="submit"
+				onClick={() => unregister('confirm')}
 			>
 				Registre-se
 			</Styled.Button>
 		</Styled.Form>
 	)
+}
+
+UserRegisterComponent.propTypes = {
+	email: PropTypes.string.isRequired,
+	senha: PropTypes.string.isRequired,
+	confirm: PropTypes.string.isRequired
 }

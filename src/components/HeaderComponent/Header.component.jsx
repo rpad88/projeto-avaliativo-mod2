@@ -1,8 +1,10 @@
 import { IoArrowBack, IoMenu, IoPersonCircleOutline } from "react-icons/io5"
 import * as Styled from "./header.style"
+import { useContext } from "react"
+import { AuthContext } from "../../contexts/Auth.context"
 
-export default function HeaderComponent({ showSidebar, handleShowSidebar }) {
-
+export default function HeaderComponent({ showSidebar, handleShowSidebar, title }) {
+    const {auth} = useContext(AuthContext)
     
 	return (
 		<Styled.Nav>
@@ -17,9 +19,9 @@ export default function HeaderComponent({ showSidebar, handleShowSidebar }) {
 			)}
 
 			<Styled.Conteudo>
-				<Styled.MenuName>listagem de prontuarios</Styled.MenuName>
+				<Styled.MenuName>{title}</Styled.MenuName>
 				<Styled.UserInfo>
-					<span>fulano</span>
+					<span>{auth.email}</span>
 					<Styled.Icon>
 						<IoPersonCircleOutline />
 					</Styled.Icon>

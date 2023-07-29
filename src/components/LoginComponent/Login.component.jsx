@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { Row } from 'react-bootstrap'
 import { BsPersonBadge } from 'react-icons/bs'
 import * as Styled from './loginComponent.style'
 import { ModalContext } from '../../contexts/ModalContext'
@@ -9,11 +8,13 @@ import { useForm } from 'react-hook-form'
 import UserRegisterComponent from '../UserRegister/UserRegister.component'
 import { AuthContext } from '../../contexts/Auth.context'
 import { CadastroService } from '../../services/Cadastro.service'
+import PropTypes from 'prop-types'
+
 
 export default function LoginComponent() {
 	const { setShow } = useContext(ModalContext)
 	const navigate = useNavigate()
-	const { setAuth } = useContext(AuthContext)
+	const { LogIn } = useContext(AuthContext)
 
 	const {
 		register,
@@ -30,11 +31,15 @@ export default function LoginComponent() {
 	}
 
 	const redirectToHome = (user) => {
-		setAuth({ user, isLogged: true })
+		// transforma o usuário em um novo objeto com a propriedade isLogged
+		const userToLogin = {...user, isLogged: true}
+		LogIn(userToLogin)
 		navigate('/home')
+		// console.log('user logado', user)
 	}
 
 	const onSubmit = async (data) => {
+		// pega o array de usuários cadastrados
 		const usersFromDb = await CadastroService.VerificaConta()
 
 		const user = usersFromDb.find((u) => u.email === data.email)
@@ -104,4 +109,10 @@ export default function LoginComponent() {
 			</ModalComponent>
 		</>
 	)
+}
+
+
+LoginComponent.propTypes = {
+	email: PropTypes.string.isRequired,
+	senha: PropTypes.string.isRequired
 }

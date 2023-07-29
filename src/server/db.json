@@ -1,33 +1,6 @@
 {
   "pacientes": [
     {
-      "id": 1,
-      "nome": "",
-      "genero": "",
-      "data_nascimento": "",
-      "cpf": "",
-      "estado_civil": "",
-      "tel": "",
-      "email": "",
-      "naturalidade": "",
-      "contato_emergencia": "",
-      "alergias": [],
-      "cuidados_especificos": [],
-      "convenio": "",
-      "num_convenio": "",
-      "validade_convenio": "",
-      "endereco": {
-        "cep": "",
-        "cidade": "",
-        "estado": "",
-        "logradouro": "",
-        "numero": "",
-        "complemento": "",
-        "bairro": "",
-        "referencia": ""
-      }
-    },
-    {
       "nome": "Fulano da silva",
       "email": "fulano@teste.com",
       "genero": "m",
@@ -76,6 +49,31 @@
       "complemento": "",
       "referencia": "",
       "id": 3
+    },
+    {
+      "nome": "Arthur Padilha",
+      "email": "art@pad.com",
+      "genero": "m",
+      "nascimento": "2023-03-22",
+      "cpf": "45645645600",
+      "estadoCivil": "solteiro",
+      "tel": "65999999999",
+      "naturalidade": "cuiaba",
+      "contatoEmergencia": "65988888888",
+      "alergias": "",
+      "cuidados": "",
+      "convenio": "",
+      "numConvenio": "",
+      "valConvenio": "",
+      "cep": "78048145",
+      "estado": "MT",
+      "cidade": "Cuiabá",
+      "rua": "Avenida Mário Palma",
+      "bairro": "Ribeirão do Lipa",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "id": 4
     }
   ],
   "users": [
@@ -90,6 +88,47 @@
       "password": "987654321",
       "confirm": "987654321",
       "id": 2
+    },
+    {
+      "email": "fulano@fulano.com",
+      "password": "123456789",
+      "confirm": "123456789",
+      "id": 3
+    }
+  ],
+  "consultas": [
+    {
+      "motivo": "dor de cabeça",
+      "data": "2023-07-29",
+      "horario": "16:00",
+      "sintomas": "o paciente reclama de dores de cabeça",
+      "medicacao": "paracetamol",
+      "dosagem": "1 comprimido de 8 em 8",
+      "id": 1
+    },
+    {
+      "motivo": "dor de cabeça",
+      "data": "2023-07-29",
+      "horario": "16:02",
+      "sintomas": "paciente se queixa de cefaleia",
+      "medicacao": "paracetamol",
+      "dosagem": "tomar um comprimido quando sentir dores",
+      "IdMedico": 1,
+      "idPaciente": 3,
+      "id": 2
+    }
+  ],
+  "exames": [
+    {
+      "nome": "hemograma completo",
+      "data": "2023-07-29",
+      "hora": "16:20",
+      "tipo": "sanguineo",
+      "lab": "hemaclin",
+      "resultado": "o exame apresentou leves alterações no colesterol",
+      "idMedico": 1,
+      "idPaciente": 2,
+      "id": 1
     }
   ]
 }

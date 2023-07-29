@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap'
-import * as Styled from './CadPaciente.style'
+import * as Styled from '../../styles/Form.style'
 import { useContext, useRef, useState } from 'react'
 import { CadastroService } from '../../services/Cadastro.service'
 import { useForm } from 'react-hook-form'
@@ -15,22 +15,25 @@ export default function CadPacienteComponent() {
 		reset,
 		formState: { errors },
 	} = useForm()
-	const cidadeRef = useRef()
-	const estadoRef = useRef()
-	const ruaRef = useRef()
-	const bairroRef = useRef()
 	const cepRef = useRef()
 
 	// variável para chamar a animação
 	const { setShow } = useContext(ModalContext)
 
 
-	const submitForm = (data) => {
+	const submitForm = async (data) => {
 		// console.table(data)
 		if (errors.logradouro || errors.cidade)
 			return alert('você deve inserir um CEP válido')
-		const ok = CadastroService.CadastraPaciente(data)
-		if(ok) setShow(true) //Abre a animação confirmando o cadastro.
+
+		//verifica se o CPF já existe no banco
+		const exists = await CadastroService.PacienteExists(data.cpf)
+		if(exists) return alert('Paciente já cadastrado')	
+
+		const ok = await CadastroService.CadastraPaciente(data)
+		console.log(ok)
+		//Abre a animação confirmando o cadastro.
+		if(ok) setShow(true)
 		reset() //Limpa os inputs
 	}
 
@@ -53,10 +56,9 @@ export default function CadPacienteComponent() {
 	return (
 		<>
 			<Container>
-				<h4 style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-					Cadastro
-				</h4>
+				
 				<Styled.Form onSubmit={handleSubmit(submitForm)}>
+					<Styled.Legend>Cadastro de paciente</Styled.Legend>
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="nome">Nome completo</Styled.Label>
 						<Styled.Input
@@ -274,9 +276,7 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="estado"
-									ref={estadoRef}
 									readOnly
-									value={''}
 									{...register('estado')}
 									className={errors.estado && 'danger'}
 								/>
@@ -286,8 +286,6 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="cidade"
-									ref={cidadeRef}
-									value={''}
 									readOnly
 									{...register('cidade')}
 									className={errors.cidade && 'danger'}
@@ -300,8 +298,6 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="rua"
-									ref={ruaRef}
-									value={''}
 									readOnly
 									{...register('rua')}
 								/>
@@ -311,7 +307,6 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="bairro"
-									ref={bairroRef}
 									readOnly
 									{...register('bairro')}
 								/>
