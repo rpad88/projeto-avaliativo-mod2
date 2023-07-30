@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap'
 import * as Styled from '../../styles/Form.style'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useRef } from 'react'
 import { CadastroService } from '../../services/Cadastro.service'
 import { useForm } from 'react-hook-form'
 import ModalComponent from '../Modal/Modal.component'
@@ -51,13 +51,6 @@ export default function CadPacienteComponent() {
 		} catch (error) {
 			console.error(error)
 		}
-	}
-
-	const formataTel = (e) => {
-			const telFormatado = e.target.value
-								.replace(/(..)(.)(....)(....)/ //-> o ponto significa qualquer caracter | os () separam em 4 grupos
-								, '($1) $2 $3-$4') //aqui faz a formatação através dos grupos
-			setValue('tel', telFormatado)
 	}
 
 	return (
@@ -173,7 +166,7 @@ export default function CadPacienteComponent() {
 								placeholder="(xx) 9 9999-9999"
 								maxLength={11}
 								minLength={11}
-								onChange={formataTel}
+								onChange={handleTel}
 								className={errors.tel && 'danger'}
 							/>
 							{errors.tel && <small>Informe seu telefone</small>}
