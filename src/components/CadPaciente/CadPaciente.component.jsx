@@ -53,6 +53,13 @@ export default function CadPacienteComponent() {
 		}
 	}
 
+	const formataTel = (e) => {
+			const telFormatado = e.target.value
+								.replace(/(..)(.)(....)(....)/ //-> o ponto significa qualquer caracter | os () separam em 4 grupos
+								, '($1) $2 $3-$4') //aqui faz a formatação através dos grupos
+			setValue('tel', telFormatado)
+	}
+
 	return (
 		<>
 			<Container>
@@ -166,6 +173,7 @@ export default function CadPacienteComponent() {
 								placeholder="(xx) 9 9999-9999"
 								maxLength={11}
 								minLength={11}
+								onChange={formataTel}
 								className={errors.tel && 'danger'}
 							/>
 							{errors.tel && <small>Informe seu telefone</small>}
