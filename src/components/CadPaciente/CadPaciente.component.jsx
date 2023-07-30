@@ -112,6 +112,7 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="date"
 								name="nascimento"
+								maxLength={8}
 								// pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 								{...register('nascimento', {
 									required: true,
@@ -166,7 +167,6 @@ export default function CadPacienteComponent() {
 								placeholder="(xx) 9 9999-9999"
 								maxLength={11}
 								minLength={11}
-								onChange={handleTel}
 								className={errors.tel && 'danger'}
 							/>
 							{errors.tel && <small>Informe seu telefone</small>}

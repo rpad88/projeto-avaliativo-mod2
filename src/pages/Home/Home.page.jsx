@@ -6,6 +6,7 @@ import { SidebarContext } from "../../contexts/SidebarContext"
 import HeaderComponent from "../../components/HeaderComponent/Header.component"
 import StatusComponent from "../../components/StatusComponent/Status.component"
 import SearchComponent from "../../components/SearchComponent/Search.component"
+import CardsContainer from "../../components/CardPaciente/Cards.container"
 
 export default function HomePage() {
 	const { showSidebar, setShowSidebar} =
@@ -27,6 +28,9 @@ export default function HomePage() {
 					<HeaderComponent showSidebar={showSidebar} handleShowSidebar={handleShowSidebar} title='estatísticas e informações'/>
 					<StatusComponent />
 					<SearchComponent title='Informações rápidas de pacientes' placeholder='Digite o nome do paciente' />
+					<CardsContainer>
+
+					</CardsContainer>
 				</Container>
 			</div>
 		</>

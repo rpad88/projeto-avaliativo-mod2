@@ -74,6 +74,31 @@
       "complemento": "",
       "referencia": "",
       "id": 4
+    },
+    {
+      "nome": "Dino da Silva Sauro",
+      "email": "dino@sauro.com",
+      "genero": "m",
+      "nascimento": "1970-05-05",
+      "cpf": "12378912378",
+      "estadoCivil": "casado",
+      "tel": "65999999999",
+      "naturalidade": "rio branco",
+      "contatoEmergencia": "65988888888",
+      "alergias": "",
+      "cuidados": "",
+      "convenio": "",
+      "numConvenio": "",
+      "valConvenio": "",
+      "cep": "78030030",
+      "estado": "MT",
+      "cidade": "Cuiabá",
+      "rua": "Rua Oir Castilho",
+      "bairro": "Cidade Alta",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "id": 5
     }
   ],
   "users": [
