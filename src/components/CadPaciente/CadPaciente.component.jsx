@@ -1,12 +1,13 @@
-import { Container } from 'react-bootstrap'
-import * as Styled from '../../styles/Form.style'
-import { useContext, useEffect, useRef } from 'react'
-import { CadastroService } from '../../services/Cadastro.service'
-import { useForm } from 'react-hook-form'
-import ModalComponent from '../Modal/Modal.component'
-import { ModalContext } from '../../contexts/ModalContext'
-import SuccessComponent from '../Success/Success.component'
-import { PatientContext } from '../../contexts/Patient.context'
+import { Container } from "react-bootstrap"
+import * as Styled from "../../styles/Form.style"
+import { useContext, useEffect, useRef } from "react"
+import { CadastroService } from "../../services/Cadastro.service"
+import { useForm } from "react-hook-form"
+import ModalComponent from "../Modal/Modal.component"
+import { ModalContext } from "../../contexts/ModalContext"
+import SuccessComponent from "../Success/Success.component"
+import { PatientContext } from "../../contexts/Patient.context"
+import { useNavigate } from "react-router-dom"
 
 export default function CadPacienteComponent() {
 	const {
@@ -16,38 +17,39 @@ export default function CadPacienteComponent() {
 		reset,
 		formState: { errors },
 	} = useForm()
-	const cepRef = useRef()
 
-	// variável para chamar a animação
-	const { setShow } = useContext(ModalContext)
-	const { patient } = useContext(PatientContext)
+	const cepRef = useRef()
+	const navigate = useNavigate()
+	
+	const { setShow } = useContext(ModalContext) // função para chamar a animação
+	const { patient } = useContext(PatientContext) // recebe o paciente clicado
 
 	useEffect(() => {
-		if(!patient) return
+		if (!patient) return
 		async function preencheCampos() {
 			cepRef.current.value = patient.cep
-			for(let field in patient) {
-				if(field !== 'estado' || 'cidade' || 'rua' || 'bairro' || 'cep'){
+			for (let field in patient) {
+				if (field !== "estado" || "cidade" || "rua" || "bairro" || "cep") {
 					setValue(field, patient[field])
 				}
 			}
 		}
 		preencheCampos()
-	},[])
+	}, [])
 
 	const submitForm = async (data) => {
 		// console.table(data)
 		if (errors.rua || errors.cidade)
-			return alert('você deve inserir um CEP válido')
+			return alert("você deve inserir um CEP válido")
 
 		//verifica se o CPF já existe no banco
 		const exists = await CadastroService.PacienteExists(data.cpf)
-		if(exists) return alert('Paciente já cadastrado')	
+		if (exists) return alert("Paciente já cadastrado")
 
 		const ok = await CadastroService.CadastraPaciente(data)
-		console.log(ok)
+
 		//Abre a animação confirmando o cadastro.
-		if(ok) setShow(true)
+		if (ok) setShow(true)
 		reset() //Limpa os inputs
 	}
 
@@ -57,11 +59,11 @@ export default function CadPacienteComponent() {
 			const data = await CadastroService.GetEndereco(cep)
 
 			//IMPORTANTE setar os valores puxados pela API no input antes de salvar.
-			setValue('rua', data.logradouro)
-			setValue('bairro', data.bairro)
-			setValue('cidade', data.localidade)
-			setValue('estado', data.uf)
-			setValue('cep', cep)
+			setValue("rua", data.logradouro)
+			setValue("bairro", data.bairro)
+			setValue("cidade", data.localidade)
+			setValue("estado", data.uf)
+			setValue("cep", cep)
 		} catch (error) {
 			console.error(error)
 		}
@@ -69,27 +71,42 @@ export default function CadPacienteComponent() {
 
 	const handleEdit = async (data) => {
 		const ok = await CadastroService.EditaPaciente(data)
-		if(ok) setShow(true)
+		if (ok) setShow(true)
 		console.log(`Paciente ${data.nome} editado com sucesso`)
 		reset()
+	}
+
+	const handleDelete = async (patient) => {
+		const pacienteTemConsulta =
+			await CadastroService.BuscaConsultasPorPaciente(patient.id)
+		const pacienteTemExame = await CadastroService.BuscaExamesPorPaciente(
+			patient.id
+		)
+
+		if (pacienteTemConsulta || pacienteTemExame)
+			return alert(
+				"Só é possível deletar paciente que não tem consulta nem exame cadastrado."
+			)
+		const resp = await CadastroService.DeletaPaciente(patient.id)
+		return console.log(resp)
+		navigate('/home')
 	}
 
 	return (
 		<>
 			<Container>
-				
 				<Styled.Form onSubmit={handleSubmit(submitForm)}>
 					<Styled.Legend>Cadastro de paciente</Styled.Legend>
 					<Styled.InputGroup>
 						<Styled.Label htmlFor="nome">Nome completo</Styled.Label>
 						<Styled.Input
 							name="nome"
-							{...register('nome', {
+							{...register("nome", {
 								required: true,
 								minLength: 5,
 								maxLength: 50,
 							})}
-							className={errors.nome && 'danger'}
+							className={errors.nome && "danger"}
 						/>
 						{errors.nome && <small>Favor inserir o nome completo</small>}
 					</Styled.InputGroup>
@@ -98,10 +115,10 @@ export default function CadPacienteComponent() {
 						<Styled.Input
 							type="email"
 							name="email"
-							{...register('email', {
+							{...register("email", {
 								pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
 							})}
-							className={errors.email && 'danger'}
+							className={errors.email && "danger"}
 						/>
 						{errors.email && (
 							<small>Favor inserir um e-mail válido</small>
@@ -113,10 +130,10 @@ export default function CadPacienteComponent() {
 							<Styled.Label htmlFor="genero">Gênero</Styled.Label>
 							<Styled.Select
 								name="genero"
-								{...register('genero', {
+								{...register("genero", {
 									required: true,
 								})}
-								className={errors.genero && 'danger'}
+								className={errors.genero && "danger"}
 							>
 								<option value="" hidden>
 									Escolha uma opção
@@ -135,11 +152,11 @@ export default function CadPacienteComponent() {
 								name="nascimento"
 								maxLength={8}
 								// pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-								{...register('nascimento', {
+								{...register("nascimento", {
 									required: true,
 									pattern: /[0-9]{4}-[0-9]{2}-[0-9]{2}/, //Colocado o patter para teste
 								})}
-								className={errors.nascimento && 'danger'}
+								className={errors.nascimento && "danger"}
 							/>
 							{errors.nascimento && (
 								<small>Informe sua data de nascimento</small>
@@ -153,8 +170,8 @@ export default function CadPacienteComponent() {
 								minLength={11}
 								maxLength={11}
 								// pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
-								{...register('cpf', { required: true })}
-								className={errors.cpf && 'danger'}
+								{...register("cpf", { required: true })}
+								className={errors.cpf && "danger"}
 							/>
 							{errors.cpf && <small>Informe seu CPF</small>}
 						</Styled.InputGroup>
@@ -162,8 +179,8 @@ export default function CadPacienteComponent() {
 							<Styled.Label htmlFor="nome">Estado Civil</Styled.Label>
 							<Styled.Select
 								name="estadoCivil"
-								{...register('estadoCivil', { required: true })}
-								className={errors.cpf && 'danger'}
+								{...register("estadoCivil", { required: true })}
+								className={errors.cpf && "danger"}
 							>
 								<option value="" hidden>
 									Escolha uma opção
@@ -184,11 +201,11 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="tel"
 								name="tel"
-								{...register('tel', { required: true })}
+								{...register("tel", { required: true })}
 								placeholder="(xx) 9 9999-9999"
 								maxLength={11}
 								minLength={11}
-								className={errors.tel && 'danger'}
+								className={errors.tel && "danger"}
 							/>
 							{errors.tel && <small>Informe seu telefone</small>}
 						</Styled.InputGroup>
@@ -199,12 +216,12 @@ export default function CadPacienteComponent() {
 							</Styled.Label>
 							<Styled.Input
 								name="naturalidade"
-								{...register('naturalidade', {
+								{...register("naturalidade", {
 									required: true,
 									minLength: 5,
 									maxLength: 50,
 								})}
-								className={errors.naturalidade && 'danger'}
+								className={errors.naturalidade && "danger"}
 							/>
 							{errors.naturalidade && (
 								<small>Informe sua naturalidade</small>
@@ -218,12 +235,12 @@ export default function CadPacienteComponent() {
 								type="tel"
 								name="contatoEmergencia"
 								maxLength={11}
-								{...register('contatoEmergencia', {
+								{...register("contatoEmergencia", {
 									required: true,
 									minLength: 11,
 									maxLength: 11,
 								})}
-								className={errors.contatoEmergencia && 'danger'}
+								className={errors.contatoEmergencia && "danger"}
 							/>
 							{errors.contatoEmergencia && (
 								<small>Informe um contato de emergência</small>
@@ -236,7 +253,7 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="text"
 								name="alergias"
-								{...register('alergias')}
+								{...register("alergias")}
 							/>
 						</Styled.InputGroup>
 						<Styled.InputGroup>
@@ -244,7 +261,7 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="text"
 								name="cuidados"
-								{...register('cuidados')}
+								{...register("cuidados")}
 							/>
 						</Styled.InputGroup>
 					</div>
@@ -254,7 +271,7 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="text"
 								name="convenio"
-								{...register('convenio')}
+								{...register("convenio")}
 							/>
 						</Styled.InputGroup>
 						<Styled.InputGroup>
@@ -264,7 +281,7 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="text"
 								name="numConvenio"
-								{...register('numConvenio')}
+								{...register("numConvenio")}
 							/>
 						</Styled.InputGroup>
 						<Styled.InputGroup>
@@ -274,7 +291,7 @@ export default function CadPacienteComponent() {
 							<Styled.Input
 								type="date"
 								name="valConvenio"
-								{...register('valConvenio')}
+								{...register("valConvenio")}
 							/>
 						</Styled.InputGroup>
 					</div>
@@ -287,20 +304,20 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="tel"
 									name="cep"
-									{...register('cep')}
+									{...register("cep")}
 									onBlur={cepInput}
 									maxLength={8}
 									ref={cepRef}
 								/>
 							</Styled.InputGroup>
-							<Styled.InputGroup style={{ flexBasis: '10%' }}>
+							<Styled.InputGroup style={{ flexBasis: "10%" }}>
 								<Styled.Label htmlFor="estado">Estado</Styled.Label>
 								<Styled.Input
 									type="text"
 									name="estado"
 									readOnly
-									{...register('estado')}
-									className={errors.estado && 'danger'}
+									{...register("estado")}
+									className={errors.estado && "danger"}
 								/>
 							</Styled.InputGroup>
 							<Styled.InputGroup>
@@ -309,8 +326,8 @@ export default function CadPacienteComponent() {
 									type="text"
 									name="cidade"
 									readOnly
-									{...register('cidade')}
-									className={errors.cidade && 'danger'}
+									{...register("cidade")}
+									className={errors.cidade && "danger"}
 								/>
 							</Styled.InputGroup>
 						</div>
@@ -321,7 +338,7 @@ export default function CadPacienteComponent() {
 									type="text"
 									name="rua"
 									readOnly
-									{...register('rua')}
+									{...register("rua")}
 								/>
 							</Styled.InputGroup>
 							<Styled.InputGroup>
@@ -330,15 +347,15 @@ export default function CadPacienteComponent() {
 									type="text"
 									name="bairro"
 									readOnly
-									{...register('bairro')}
+									{...register("bairro")}
 								/>
 							</Styled.InputGroup>
-							<Styled.InputGroup style={{ flexBasis: '10%' }}>
+							<Styled.InputGroup style={{ flexBasis: "10%" }}>
 								<Styled.Label htmlFor="numero">Número</Styled.Label>
 								<Styled.Input
 									type="number"
 									name="numero"
-									{...register('numero')}
+									{...register("numero")}
 								/>
 							</Styled.InputGroup>
 						</div>
@@ -350,7 +367,7 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="complemento"
-									{...register('complemento')}
+									{...register("complemento")}
 								/>
 							</Styled.InputGroup>
 							<Styled.InputGroup>
@@ -360,23 +377,32 @@ export default function CadPacienteComponent() {
 								<Styled.Input
 									type="text"
 									name="referencia"
-									{...register('referencia')}
+									{...register("referencia")}
 								/>
 							</Styled.InputGroup>
 						</div>
 					</Styled.Fieldset>
 					<div className="actions">
 						<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
-						<Styled.BtnEditar disabled={!patient} onClick={handleSubmit(handleEdit)} >Editar</Styled.BtnEditar>
-						<Styled.BtnDeletar disabled={!patient}>Deletar</Styled.BtnDeletar>
+						<Styled.BtnEditar
+							disabled={!patient}
+							onClick={handleSubmit(handleEdit)}
+						>
+							Editar
+						</Styled.BtnEditar>
+						<Styled.BtnDeletar
+							disabled={!patient}
+							onClick={handleSubmit(handleDelete)}
+						>
+							Deletar
+						</Styled.BtnDeletar>
 					</div>
 				</Styled.Form>
 			</Container>
-			
+
 			<ModalComponent>
 				<SuccessComponent />
 			</ModalComponent>
-			
 		</>
 	)
 }

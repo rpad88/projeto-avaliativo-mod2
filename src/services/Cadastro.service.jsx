@@ -78,10 +78,19 @@ const EditaPaciente = async (dadosDoForm) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(dadosDoForm)
+			body: JSON.stringify(dadosDoForm),
 		}
 
 		const ok = await fetch(`${PACIENTES_URL}/${dadosDoForm.id}`, paciente)
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const DeletaPaciente = async (id) => {
+	try {
+		const result = await fetch(`${PACIENTES_URL}/${id}`, {method: 'DELETE'}).then(() => `Paciente ${id} deletado com sucesso.`)
+		return result
 	} catch (error) {
 		console.error(error.message)
 	}
@@ -100,6 +109,7 @@ const PacienteExists = async (cpf) => {
 	}
 }
 
+//  ***** MÉDICO (LOGIN) *****
 // GET | User LOGIN
 const VerificaConta = async () => {
 	try {
@@ -111,7 +121,6 @@ const VerificaConta = async () => {
 		console.error(error.message)
 	}
 }
-// -------------------------------------
 
 // POST | Cadastro de usuário
 const CadastraUser = async (dados) => {
@@ -163,12 +172,22 @@ const CadastraConsulta = async (dados) => {
 	}
 }
 
-const BuscaTodasConsultas = async (dados) => {
+const BuscaTodasConsultas = async () => {
 	try {
 		const arrayConsultas = await fetch(CONSULTAS_URL).then((res) =>
 			res.json()
 		)
 		return arrayConsultas
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const BuscaConsultasPorPaciente = async (id) => {
+	try {
+		const arrayConsultas = await BuscaTodasConsultas()
+		const filtradas = arrayConsultas.filter(consulta => consulta.idPaciente === id)
+		return filtradas.length > 0 ? filtradas : false
 	} catch (error) {
 		console.error(error.message)
 	}
@@ -205,6 +224,16 @@ const BuscaTodosExames = async () => {
 	}
 }
 
+const BuscaExamesPorPaciente = async (id) => {
+	try {
+		const arrayExames = await BuscaTodosExames()
+		const filtradas = arrayExames.filter(exame => exame.idPaciente === id)
+		return filtradas.length > 0 ? filtradas : false
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
 export const CadastroService = {
 	GetEndereco,
 	CadastraPaciente,
@@ -217,4 +246,7 @@ export const CadastroService = {
 	CadastraExame,
 	BuscaTodosExames,
 	EditaPaciente,
+	DeletaPaciente,
+	BuscaConsultasPorPaciente,
+	BuscaExamesPorPaciente,
 }
