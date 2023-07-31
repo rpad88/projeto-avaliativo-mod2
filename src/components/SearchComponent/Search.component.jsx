@@ -59,13 +59,24 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 					</Styled.SearchBtn>
 				</Styled.Search>
 				{input && (
-					<Styled.Ul>
+					<Styled.Table>
+						<tr>
+							<th>Id</th>
+							<th>Nome</th>
+							<th>Data Nascimento</th>
+						</tr>
 						{
 							results.map((p) => {
-								return <li onClick={() =>handlePaciente(p)} key={p.id}>{p.nome}</li>
+								return (
+									<tr key={p.id} onClick={() =>handlePaciente(p)}>
+										<td>{p.id}</td>
+										<td>{p.nome}</td>
+										<td>{p.nascimento}</td>
+									</tr>
+								)
 							})
 						}
-					</Styled.Ul>
+					</Styled.Table>
 				)}
 			</Styled.SearchContainer>
 		</>

@@ -1,0 +1,150 @@
+{
+  "pacientes": [
+    {
+      "nome": "Fulano da silva",
+      "email": "fulano@teste.com",
+      "genero": "m",
+      "nascimento": "2000-10-10",
+      "cpf": "12345678901",
+      "estadoCivil": "casado",
+      "tel": "65912345678",
+      "naturalidade": "Cuiaba",
+      "contatoEmergencia": "65912345678",
+      "alergias": "",
+      "cuidados": "",
+      "convenio": "",
+      "numConvenio": "",
+      "valConvenio": "",
+      "cep": "78030030",
+      "estado": "MT",
+      "cidade": "Cuiabá",
+      "rua": "Rua Oir Castilho",
+      "bairro": "Cidade Alta",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "id": 2
+    },
+    {
+      "nome": "Beltrano Barbosa",
+      "email": "beltrano@barbosa.com",
+      "genero": "m",
+      "nascimento": "1999-01-01",
+      "cpf": "98765432101",
+      "estadoCivil": "solteiro",
+      "tel": "34999999999",
+      "naturalidade": "Araguari",
+      "contatoEmergencia": "65999678901",
+      "alergias": "",
+      "cuidados": "",
+      "convenio": "",
+      "numConvenio": "",
+      "valConvenio": "",
+      "cep": "38446002",
+      "estado": "MG",
+      "cidade": "Araguari",
+      "rua": "Rua Ângelo de Lima",
+      "bairro": "Bosque",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "id": 3
+    },
+    {
+      "nome": "Arthur Padilha",
+      "email": "art@pad.com",
+      "genero": "m",
+      "nascimento": "2023-03-22",
+      "cpf": "45645645600",
+      "estadoCivil": "solteiro",
+      "tel": "65333333333",
+      "naturalidade": "cuiaba",
+      "contatoEmergencia": "65988888888",
+      "alergias": "",
+      "cuidados": "",
+      "convenio": "",
+      "numConvenio": "",
+      "valConvenio": "",
+      "cep": "78048145",
+      "estado": "MT",
+      "cidade": "Cuiabá",
+      "rua": "Avenida Mário Palma",
+      "bairro": "Ribeirão do Lipa",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "id": 4
+    },
+    {
+      "nome": "Dino da Silva Sauro",
+      "email": "dino@sauro.com",
+      "genero": "m",
+      "nascimento": "1920-05-05",
+      "cpf": "12378912378",
+      "estadoCivil": "casado",
+      "tel": "65999999999",
+      "naturalidade": "rio branco",
+      "contatoEmergencia": "65988888888",
+      "alergias": "",
+      "cuidados": "",
+      "convenio": "",
+      "numConvenio": "",
+      "valConvenio": "",
+      "cep": "78005970",
+      "estado": "MT",
+      "cidade": "Cuiabá",
+      "rua": "Praça da República",
+      "bairro": "Centro-Norte",
+      "numero": "",
+      "complemento": "",
+      "referencia": "",
+      "id": 5
+    }
+  ],
+  "users": [
+    {
+      "email": "admin@usercep.com",
+      "password": "123456789",
+      "confirm": "123456789",
+      "id": 1
+    },
+    {
+      "email": "beltrano@barbosa.com",
+      "password": "987654321",
+      "confirm": "987654321",
+      "id": 2
+    },
+    {
+      "email": "fulano@fulano.com",
+      "password": "123456789",
+      "confirm": "123456789",
+      "id": 3
+    }
+  ],
+  "consultas": [
+    {
+      "motivo": "dor de cabeça",
+      "data": "2023-07-29",
+      "horario": "16:02",
+      "sintomas": "paciente se queixa de cefaleia",
+      "medicacao": "paracetamol",
+      "dosagem": "tomar um comprimido quando sentir dores",
+      "IdMedico": 1,
+      "idPaciente": 3,
+      "id": 2
+    }
+  ],
+  "exames": [
+    {
+      "nome": "hemograma completo",
+      "data": "2023-07-29",
+      "hora": "16:20",
+      "tipo": "sanguineo",
+      "lab": "hemaclin",
+      "resultado": "o exame apresentou leves alterações no colesterol",
+      "idMedico": 1,
+      "idPaciente": 2,
+      "id": 1
+    }
+  ]
+}
