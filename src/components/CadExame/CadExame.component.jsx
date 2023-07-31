@@ -62,9 +62,9 @@ export default function CadExameComponent({paciente}) {
 						exame de <span style={{color: 'rgb(56, 107, 201)'}}>{paciente.nome || '...'}</span>
 					</Styled.Legend>
 					<div style={{ display: "flex", gap: ".5rem" }}>
+						<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
 						<Styled.BtnEditar disabled>Editar</Styled.BtnEditar>
 						<Styled.BtnDeletar disabled>Deletar</Styled.BtnDeletar>
-						<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
 					</div>
 				</div>
 
