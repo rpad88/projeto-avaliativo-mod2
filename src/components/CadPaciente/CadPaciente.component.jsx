@@ -1,11 +1,12 @@
 import { Container } from 'react-bootstrap'
 import * as Styled from '../../styles/Form.style'
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { CadastroService } from '../../services/Cadastro.service'
 import { useForm } from 'react-hook-form'
 import ModalComponent from '../Modal/Modal.component'
 import { ModalContext } from '../../contexts/ModalContext'
 import SuccessComponent from '../Success/Success.component'
+import { PatientContext } from '../../contexts/Patient.context'
 
 export default function CadPacienteComponent() {
 	const {
@@ -19,11 +20,24 @@ export default function CadPacienteComponent() {
 
 	// variável para chamar a animação
 	const { setShow } = useContext(ModalContext)
+	const { patient } = useContext(PatientContext)
 
+	useEffect(() => {
+		if(!patient) return
+		async function preencheCampos() {
+			cepRef.current.value = patient.cep
+			for(let field in patient) {
+				if(field !== 'estado' || 'cidade' || 'rua' || 'bairro' || 'cep'){
+					setValue(field, patient[field])
+				}
+			}
+		}
+		preencheCampos()
+	},[])
 
 	const submitForm = async (data) => {
 		// console.table(data)
-		if (errors.logradouro || errors.cidade)
+		if (errors.rua || errors.cidade)
 			return alert('você deve inserir um CEP válido')
 
 		//verifica se o CPF já existe no banco
@@ -51,6 +65,13 @@ export default function CadPacienteComponent() {
 		} catch (error) {
 			console.error(error)
 		}
+	}
+
+	const handleEdit = async (data) => {
+		const ok = await CadastroService.EditaPaciente(data)
+		if(ok) setShow(true)
+		console.log(`Paciente ${data.nome} editado com sucesso`)
+		reset()
 	}
 
 	return (
@@ -346,8 +367,8 @@ export default function CadPacienteComponent() {
 					</Styled.Fieldset>
 					<div className="actions">
 						<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
-						<Styled.BtnEditar disabled>Editar</Styled.BtnEditar>
-						<Styled.BtnDeletar disabled>Deletar</Styled.BtnDeletar>
+						<Styled.BtnEditar disabled={!patient} onClick={handleSubmit(handleEdit)} >Editar</Styled.BtnEditar>
+						<Styled.BtnDeletar disabled={!patient}>Deletar</Styled.BtnDeletar>
 					</div>
 				</Styled.Form>
 			</Container>

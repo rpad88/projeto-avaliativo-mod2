@@ -44,7 +44,7 @@ const BuscaTodosPacientes = async () => {
 	}
 }
 
-// PUT
+// POST
 const CadastraPaciente = async (dadosDoForm) => {
 	try {
 		const paciente = {
@@ -65,6 +65,23 @@ const CadastraPaciente = async (dadosDoForm) => {
 				return true
 			})
 		return ok
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+// PUT
+const EditaPaciente = async (dadosDoForm) => {
+	try {
+		const paciente = {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dadosDoForm)
+		}
+
+		const ok = await fetch(`${PACIENTES_URL}/${dadosDoForm.id}`, paciente)
 	} catch (error) {
 		console.error(error.message)
 	}
@@ -199,4 +216,5 @@ export const CadastroService = {
 	BuscaTodasConsultas,
 	CadastraExame,
 	BuscaTodosExames,
+	EditaPaciente,
 }

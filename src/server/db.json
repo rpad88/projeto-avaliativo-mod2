@@ -57,7 +57,7 @@
       "nascimento": "2023-03-22",
       "cpf": "45645645600",
       "estadoCivil": "solteiro",
-      "tel": "65999999999",
+      "tel": "65333333333",
       "naturalidade": "cuiaba",
       "contatoEmergencia": "65988888888",
       "alergias": "",
@@ -122,15 +122,6 @@
     }
   ],
   "consultas": [
-    {
-      "motivo": "dor de cabeça",
-      "data": "2023-07-29",
-      "horario": "16:00",
-      "sintomas": "o paciente reclama de dores de cabeça",
-      "medicacao": "paracetamol",
-      "dosagem": "1 comprimido de 8 em 8",
-      "id": 1
-    },
     {
       "motivo": "dor de cabeça",
       "data": "2023-07-29",

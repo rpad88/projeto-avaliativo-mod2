@@ -1,7 +1,13 @@
+import { Navigate, useNavigate } from "react-router-dom"
 import * as Styled from "./CardPaciente.style"
 import { IoPersonCircleOutline } from "react-icons/io5"
+import { useContext } from "react"
+import { PatientContext } from "../../contexts/Patient.context"
 
 export default function CardPacienteComponent({paciente}) {
+
+	const navigate = useNavigate()
+	const { setPatient } = useContext(PatientContext)
 
     const calculaIdade = () => {
         const dns = paciente.nascimento.replaceAll('-', ' ') //transforma yyyy-MM-dd em yyyy MM dd
@@ -23,6 +29,10 @@ export default function CardPacienteComponent({paciente}) {
         return telFormatado
     }
 
+	const handleVerMais = () => {
+		setPatient(paciente)
+		navigate('/cadPaciente')
+	}
 
 	return (
 		<Styled.Card>
@@ -38,7 +48,7 @@ export default function CardPacienteComponent({paciente}) {
 				<Styled.CardIdade>{calculaIdade()}</Styled.CardIdade>
 				<Styled.CardTel>{formataTel()}</Styled.CardTel>
 				<Styled.CardConvenio>{paciente.convenio || 'particular'}</Styled.CardConvenio>
-				<Styled.CardBtn>ver mais</Styled.CardBtn>
+				<Styled.CardBtn onClick={handleVerMais} >ver mais</Styled.CardBtn>
 			</Styled.CardBody>
 		</Styled.Card>
 	)
