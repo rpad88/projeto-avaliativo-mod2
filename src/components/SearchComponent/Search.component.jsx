@@ -22,7 +22,6 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 					)
 				})
 				setResults(res)
-				console.log(res)
 			})
 	}
 
