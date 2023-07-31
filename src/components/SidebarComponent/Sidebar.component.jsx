@@ -11,6 +11,7 @@ import { useContext } from "react"
 import { AuthContext } from "../../contexts/Auth.context"
 import { useNavigate } from "react-router-dom"
 import LabMedicalLogo from '/images/LABMedical_Logo.png'
+import { PatientContext } from "../../contexts/Patient.context"
 
 
 export default function SidebarComponent({showSidebar}) {
@@ -19,6 +20,28 @@ export default function SidebarComponent({showSidebar}) {
 	const handleSair = () => {
 		LogOut()
 		navigate('/')
+	}
+
+	const { setPatient } = useContext(PatientContext) 
+
+	const handleHome = () => {
+		setPatient(null)
+		navigate('/home')
+	}
+
+	const handleCadPaciente = () => {
+		setPatient(null)
+		navigate('/cadPaciente')
+	}
+
+	const handleCadConsulta = () => {
+		setPatient(null)
+		navigate('/cadConsulta')
+	}
+
+	const handleCadExame = () => {
+		setPatient(null)
+		navigate('/cadExame')
 	}
 
 	return (
@@ -30,7 +53,7 @@ export default function SidebarComponent({showSidebar}) {
 				<SidebarActions>
 					<TopicWrapper>
 						<small>Geral</small>
-						<button onClick={() => navigate('/home')}>
+						<button onClick={handleHome}>
 							<i>
 								<IoStatsChartOutline />
 							</i>
@@ -50,7 +73,7 @@ export default function SidebarComponent({showSidebar}) {
 					</TopicWrapper>
 					<TopicWrapper>
 						<small>Pacientes</small>
-						<button onClick={() => navigate('/cadpaciente')}>
+						<button onClick={handleCadPaciente}>
 							<i>
 								<IoAddSharp />
 							</i>
@@ -69,7 +92,7 @@ export default function SidebarComponent({showSidebar}) {
 					</TopicWrapper>
 					<TopicWrapper>
 						<small>Exames</small>
-						<button onClick={() => navigate('/cadConsulta')}>
+						<button onClick={handleCadConsulta}>
 							<i>
 								<IoAddSharp />
 							</i>
@@ -77,7 +100,7 @@ export default function SidebarComponent({showSidebar}) {
 							CADASTRAR CONSULTA
 							</span>
 						</button>
-						<button onClick={() => navigate('/cadExame')}>
+						<button onClick={handleCadExame}>
 							<i>
 								<IoAddSharp />
 							</i>

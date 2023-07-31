@@ -1,20 +1,15 @@
 import { IoSearchOutline } from "react-icons/io5"
 import * as Styled from "./search.style"
-import { useEffect, useState } from "react"
-import { CadastroService } from "../../services/Cadastro.service"
+import { useContext, useState } from "react"
+import { PatientContext } from "../../contexts/Patient.context"
+import { useNavigate } from "react-router-dom"
 
 export default function SearchComponent({ title, placeholder, setPaciente }) {
-	// const [arrayPacientes, setArrayPacientes] = useState("")
 	const [input, setInput] = useState("")
 	const [results, setResults] = useState([])
 
-	// useEffect(() => {
-	// 	async function pegaPacientes() {
-	// 		const array = await CadastroService.BuscaTodosPacientes()
-	// 		setArrayPacientes(array)
-	// 	}
-	// 	pegaPacientes()
-	// })
+	const { setPatient } = useContext(PatientContext) 
+	const navigate = useNavigate()
 
 	const handleSearch = (value) => {
 		fetch("http://localhost:3000/pacientes")
@@ -33,12 +28,14 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 
 	const handleChange = (value) => {
 		handleSearch(value)
-		setInput(value)
+		setInput(value) // Input é importante para mostrar a busca dinâmica
 	}
 
 	const handlePaciente = (paciente) => {
-		setPaciente(paciente)
+		setPatient(paciente)
 		setInput('')
+		const paginaAtual = window.location.href
+		if(paginaAtual.includes('/home')) navigate('/cadPaciente')
 	}
 
 	return (
