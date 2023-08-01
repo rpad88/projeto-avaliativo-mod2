@@ -8,7 +8,7 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 	const [input, setInput] = useState("")
 	const [results, setResults] = useState([])
 
-	const { setPatient } = useContext(PatientContext) 
+	const { setPatient } = useContext(PatientContext)
 	const navigate = useNavigate()
 
 	const handleSearch = (value) => {
@@ -17,8 +17,8 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 			.then((json) => {
 				const res = json.filter((paciente) => {
 					return (
-						value &&
-						paciente.nome.toLowerCase().includes(value) || paciente.id == value
+						(value && paciente.nome.toLowerCase().includes(value)) ||
+						paciente.id == value
 					)
 				})
 				setResults(res)
@@ -32,9 +32,13 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 
 	const handlePaciente = (paciente) => {
 		setPatient(paciente)
-		setInput('')
+		setInput("")
 		const paginaAtual = window.location.href
-		if(paginaAtual.includes('/home')) navigate('/cadPaciente')
+		if (paginaAtual.includes("/home")) navigate("/cadPaciente")
+	}
+
+	const formataData = (data) => {
+		return new Date(data).toLocaleDateString('pt-BR', {timeZone: 'UTC'})
 	}
 
 	return (
@@ -59,22 +63,24 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 				</Styled.Search>
 				{input && (
 					<Styled.Table>
-						<tr>
-							<th>Id</th>
-							<th>Nome</th>
-							<th>Data Nascimento</th>
-						</tr>
-						{
-							results.map((p) => {
+						<thead style={{color: '#525252'}}>
+							<tr>
+								<th>Id</th>
+								<th>Nome</th>
+								<th>Data Nascimento</th>
+							</tr>
+						</thead>
+						<tbody>
+							{results.map((p) => {
 								return (
-									<tr key={p.id} onClick={() =>handlePaciente(p)}>
+									<tr key={p.id} onClick={() => handlePaciente(p)}>
 										<td>{p.id}</td>
 										<td>{p.nome}</td>
-										<td>{p.nascimento}</td>
+										<td>{formataData(p.nascimento)}</td>
 									</tr>
 								)
-							})
-						}
+							})}
+						</tbody>
 					</Styled.Table>
 				)}
 			</Styled.SearchContainer>
