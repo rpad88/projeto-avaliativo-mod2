@@ -15,7 +15,7 @@ export default function ProntuariosComponent() {
             setArrayPacientes(resp)
 		}
         buscaPacientes()
-	})
+	},[])
 
 	return (
 		<Styled.ProntuariosWrapper>

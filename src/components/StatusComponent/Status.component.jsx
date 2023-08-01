@@ -20,7 +20,7 @@ export default function StatusComponent() {
 			setTotalExames(arrayExames.length)
 		}
 		pegaDados()
-	})
+	},[])
 
 	return (
 		<Styled.StatusContainer>
