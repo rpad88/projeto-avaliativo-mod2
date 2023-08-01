@@ -5,11 +5,11 @@ import SidebarComponent from "../../components/SidebarComponent/Sidebar.componen
 import { Container } from "react-bootstrap"
 import HeaderComponent from "../../components/HeaderComponent/Header.component"
 import SearchComponent from "../../components/SearchComponent/Search.component"
-import ProntuariosComponent from "../../components/Prontuarios/Prontuarios.component"
+import ListaProntuariosComponent from "../../components/Prontuarios/ListaProntuarios.component"
 import { PatientContext } from "../../contexts/Patient.context"
 
 
-export default function ProntuariosPage() {
+export default function ListaProntuariosPage() {
 	const { showSidebar, setShowSidebar } = useContext(SidebarContext)
 	const { patient } = useContext(PatientContext) 
 
@@ -37,7 +37,7 @@ export default function ProntuariosPage() {
 						placeholder="Digite o nome do paciente"
 					/>
 
-					<ProntuariosComponent />
+					<ListaProntuariosComponent />
 				</Container>
 			</Container>
 		</div>

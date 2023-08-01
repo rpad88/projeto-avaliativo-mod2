@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react"
-import * as Styled from "./prontuarios.style"
+import * as Styled from "./ListaProntuarios.style"
 import { CadastroService } from "../../services/Cadastro.service"
 import { PatientContext } from "../../contexts/Patient.context"
 
-export default function ProntuariosComponent() {
+export default function ListaProntuariosComponent() {
 	const { patient, setPatient } = useContext(PatientContext)
 	const [arrayPacientes, setArrayPacientes] = useState([])
 
