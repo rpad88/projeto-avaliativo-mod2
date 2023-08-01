@@ -16,7 +16,7 @@ import { PatientContext } from "../../contexts/Patient.context"
 
 export default function SidebarComponent({showSidebar}) {
 	const navigate = useNavigate()
-	const { LogOut} = useContext(AuthContext)
+	const { LogOut } = useContext(AuthContext)
 	const handleSair = () => {
 		LogOut()
 		navigate('/')
@@ -42,6 +42,11 @@ export default function SidebarComponent({showSidebar}) {
 	const handleCadExame = () => {
 		setPatient(null)
 		navigate('/cadExame')
+	}
+
+	const handleProntuarios = () => {
+		setPatient(null)
+		navigate('/prontuarios')
 	}
 
 	return (
@@ -81,7 +86,7 @@ export default function SidebarComponent({showSidebar}) {
 							CADASTRAR
 							</span>
 						</button>
-						<button>
+						<button onClick={handleProntuarios}>
 							<i>
 								<IoList />
 							</i>
