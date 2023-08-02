@@ -88,8 +88,8 @@ export default function CadPacienteComponent() {
 				"Só é possível deletar paciente que não tem consulta nem exame cadastrado."
 			)
 		const resp = await CadastroService.DeletaPaciente(patient.id)
-		return console.log(resp)
 		navigate('/home')
+		return console.log(resp)
 	}
 
 	return (

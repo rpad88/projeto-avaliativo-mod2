@@ -70,6 +70,7 @@ export default function ListaConsultasComponent({ title, tipo, id }) {
 						{arrayDados.map((data) => (
 							<Styled.Tr
 								key={data.id}
+								data-key={data.id}
 								onClick={() => handleEdit(data)}
 							>
 								<Styled.Td>

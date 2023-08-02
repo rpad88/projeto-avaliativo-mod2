@@ -22,30 +22,40 @@ export default function SidebarComponent({showSidebar}) {
 		navigate('/')
 	}
 
-	const { setPatient } = useContext(PatientContext) 
+	const { setPatient, setConsult, setExam } = useContext(PatientContext) 
 
 	const handleHome = () => {
 		setPatient(null)
+		setConsult(null)
+		setExam(null)
 		navigate('/home')
 	}
 
 	const handleCadPaciente = () => {
 		setPatient(null)
+		setConsult(null)
+		setExam(null)
 		navigate('/cadPaciente')
 	}
 
 	const handleCadConsulta = () => {
 		setPatient(null)
+		setConsult(null)
+		setExam(null)
 		navigate('/cadConsulta')
 	}
 
 	const handleCadExame = () => {
 		setPatient(null)
+		setConsult(null)
+		setExam(null)
 		navigate('/cadExame')
 	}
 
 	const handleProntuarios = () => {
 		setPatient(null)
+		setConsult(null)
+		setExam(null)
 		navigate('/prontuarios')
 	}
 

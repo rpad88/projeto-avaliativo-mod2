@@ -40,6 +40,16 @@ export default function CadConsultaComponent({ paciente }) {
 		setValue("horario", horario)
 	}
 
+	const handleEdit = async (data) => {
+		const newObject = { ...data, id: consult.id, IdMedico: auth.id, idPaciente: patient.id }
+		await CadastroService.EditaConsulta(newObject)
+	}
+
+	const handleDelete = async () => {
+		const ok = await CadastroService.DeletaConsulta(consult.id)
+		if(ok) setShow(true)
+	}
+
 	// aplica data e hora do sistema nos campos
 	useEffect(() => {
 		handleDate()
@@ -68,7 +78,7 @@ export default function CadConsultaComponent({ paciente }) {
 				<Styled.Legend>
 					Consulta de{' '} 
 					<span style={{ color: "rgb(56, 107, 201)" }}> 
-						{paciente.nome || patient.nome || "..."}
+						{patient && patient.nome || paciente && paciente.nome || "..."}
 					</span>
 				</Styled.Legend>
 				<Styled.InputGroup>
@@ -165,8 +175,8 @@ export default function CadConsultaComponent({ paciente }) {
 				</Styled.InputGroup>
 				<div className="actions">
 					<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
-					<Styled.BtnEditar disabled={!consult}>Editar</Styled.BtnEditar>
-					<Styled.BtnDeletar disabled={!consult}>Deletar</Styled.BtnDeletar>
+					<Styled.BtnEditar disabled={!consult} onClick={handleSubmit(handleEdit)}>Editar</Styled.BtnEditar>
+					<Styled.BtnDeletar disabled={!consult} onClick={handleSubmit(handleDelete)}>Deletar</Styled.BtnDeletar>
 				</div>
 			</Styled.Form>
 

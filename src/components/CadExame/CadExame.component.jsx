@@ -54,10 +54,20 @@ export default function CadExameComponent({paciente}) {
 	}, [])
 
   const submitForm = async (data) => {
-    	const newObj = {...data, idMedico: auth.id, idPaciente: paciente.id}
+    	const newObj = {...data, idMedico: auth.id, idPaciente: paciente.id || patient.id}
 		const ok = await CadastroService.CadastraExame(newObj)
 		if(ok) setShow(true)
 		reset()
+  }
+
+  const handleEdit = async (data) => {
+	const newObject = { ...data, id: exam.id, IdMedico: auth.id, idPaciente: patient.id }
+	await CadastroService.EditaExame(newObject)
+  }
+
+  const handleDelete = async () => {
+		const ok = await CadastroService.DeletaExame(exam.id)
+		if(ok) setShow(true)
   }
 
 	return (
@@ -72,12 +82,12 @@ export default function CadExameComponent({paciente}) {
 					}}
 				>
 					<Styled.Legend style={{ textAlign: "initial" }}>
-						exame de <span style={{color: 'rgb(56, 107, 201)'}}>{paciente.nome || patient.nome || '...'}</span>
+						exame de <span style={{color: 'rgb(56, 107, 201)'}}>{paciente && paciente.nome || patient && patient.nome || '...'}</span>
 					</Styled.Legend>
 					<div style={{ display: "flex", gap: ".5rem" }}>
 						<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
-						<Styled.BtnEditar disabled={!exam}>Editar</Styled.BtnEditar>
-						<Styled.BtnDeletar disabled={!exam}>Deletar</Styled.BtnDeletar>
+						<Styled.BtnEditar disabled={!exam} onClick={handleSubmit(handleEdit)}>Editar</Styled.BtnEditar>
+						<Styled.BtnDeletar disabled={!exam} onClick={handleSubmit(handleDelete)}>Deletar</Styled.BtnDeletar>
 					</div>
 				</div>
 

@@ -23,7 +23,7 @@ export default function ProntuarioDetailsPage() {
 					<HeaderComponent
 						showSidebar={showSidebar}
 						handleShowSidebar={handleShowSidebar}
-						title="estatísticas e informações"
+						title="Detalhes do paciente"
 					/>
 					<Container>
                         <ProntuarioDetailsComponent />

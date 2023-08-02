@@ -148,8 +148,6 @@ const CadastraUser = async (dados) => {
 	}
 }
 
-const BuscaUser = async (dados) => {}
-
 // ***** CONSULTAS *****
 const CadastraConsulta = async (dados) => {
 	try {
@@ -188,6 +186,32 @@ const BuscaConsultasPorPaciente = async (id) => {
 		const arrayConsultas = await BuscaTodasConsultas()
 		const filtradas = arrayConsultas.filter(consulta => consulta.idPaciente === id)
 		return filtradas.length > 0 ? filtradas : false
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const EditaConsulta = async (dadosDoForm) => {
+	try {
+		const consulta = {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dadosDoForm),
+		}
+
+	    const ok = await fetch(`${CONSULTAS_URL}/${dadosDoForm.id}`, consulta)
+		if (ok) return console.info(`consulta ${dadosDoForm.id} editada com sucesso`)
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const DeletaConsulta = async (id) => {
+	try {
+		const result = await fetch(`${CONSULTAS_URL}/${id}`, {method: 'DELETE'}).then(() => `Consulta ${id} deletada com sucesso.`)
+		return result
 	} catch (error) {
 		console.error(error.message)
 	}
@@ -234,6 +258,32 @@ const BuscaExamesPorPaciente = async (id) => {
 	}
 }
 
+const EditaExame = async (dados) => {
+	try {
+		const exame = {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dados),
+		}
+
+	    const ok = await fetch(`${EXAMES_URL}/${dados.id}`, exame)
+		if (ok) return console.info(`exame ${dados.id} editado com sucesso`)
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const DeletaExame = async (id) => {
+	try {
+		const result = await fetch(`${EXAMES_URL}/${id}`, {method: 'DELETE'}).then(() => `Exame ${id} deletado com sucesso.`)
+		return result
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
 export const CadastroService = {
 	GetEndereco,
 	CadastraPaciente,
@@ -249,4 +299,8 @@ export const CadastroService = {
 	DeletaPaciente,
 	BuscaConsultasPorPaciente,
 	BuscaExamesPorPaciente,
+	EditaConsulta,
+	DeletaConsulta,
+	EditaExame,
+	DeletaExame,
 }
