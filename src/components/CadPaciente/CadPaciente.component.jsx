@@ -8,6 +8,7 @@ import { ModalContext } from "../../contexts/ModalContext"
 import SuccessComponent from "../Success/Success.component"
 import { PatientContext } from "../../contexts/Patient.context"
 import { useNavigate } from "react-router-dom"
+import InputMask from "react-input-mask"
 
 export default function CadPacienteComponent() {
 	const {
@@ -15,6 +16,7 @@ export default function CadPacienteComponent() {
 		handleSubmit,
 		setValue,
 		reset,
+		control,
 		formState: { errors },
 	} = useForm()
 
@@ -151,10 +153,9 @@ export default function CadPacienteComponent() {
 								type="date"
 								name="nascimento"
 								maxLength={8}
-								// pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 								{...register("nascimento", {
 									required: true,
-									pattern: /[0-9]{4}-[0-9]{2}-[0-9]{2}/, //Colocado o patter para teste
+									pattern: /[0-9]{4}-[0-9]{2}-[0-9]{2}/, //Colocado o pattern para teste
 								})}
 								className={errors.nascimento && "danger"}
 							/>
@@ -165,10 +166,11 @@ export default function CadPacienteComponent() {
 						<Styled.InputGroup>
 							<Styled.Label htmlFor="cpf">CPF</Styled.Label>
 							<Styled.Input
+								as={InputMask}
+								control={control}
+								mask="999.999.999-99"
 								type="tel"
 								name="cpf"
-								minLength={11}
-								maxLength={11}
 								// pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
 								{...register("cpf", { required: true })}
 								className={errors.cpf && "danger"}
@@ -199,12 +201,13 @@ export default function CadPacienteComponent() {
 						<Styled.InputGroup>
 							<Styled.Label htmlFor="tel">Telefone</Styled.Label>
 							<Styled.Input
+								as={InputMask}
+								control={control}
+								mask="(99) 9 9999-9999"
 								type="tel"
 								name="tel"
 								{...register("tel", { required: true })}
-								placeholder="(xx) 9 9999-9999"
-								maxLength={11}
-								minLength={11}
+
 								className={errors.tel && "danger"}
 							/>
 							{errors.tel && <small>Informe seu telefone</small>}
@@ -232,15 +235,16 @@ export default function CadPacienteComponent() {
 								Contato de emergência
 							</Styled.Label>
 							<Styled.Input
+								as={InputMask}
+								control={control}
+								mask="(99) 9 9999-9999"
 								type="tel"
 								name="contatoEmergencia"
-								maxLength={11}
+								className={errors.contatoEmergencia && "danger"}
+								
 								{...register("contatoEmergencia", {
 									required: true,
-									minLength: 11,
-									maxLength: 11,
 								})}
-								className={errors.contatoEmergencia && "danger"}
 							/>
 							{errors.contatoEmergencia && (
 								<small>Informe um contato de emergência</small>

@@ -18,7 +18,7 @@ export default function ProntuarioDetailsComponent() {
         <Styled.PatientWrapper>
         <Styled.Span>Paciente: <span className="nome">{patient.nome}</span></Styled.Span>
         <Styled.Span>Convênio: {patient.convenio.toUpperCase() || 'Particular'}</Styled.Span>
-        <Styled.Span>Contato Emergência: {formataTel(patient.contatoEmergencia)}</Styled.Span>
+        <Styled.Span>Contato Emergência: {patient.contatoEmergencia}</Styled.Span>
         <Styled.Span>Alergias: {patient.convenio || 'nada declarado'}</Styled.Span>
         <Styled.Span onClick={() => console.log(patient.id)}>Cuidados: {patient.cuidados || 'nada declarado'}</Styled.Span>
         </Styled.PatientWrapper>

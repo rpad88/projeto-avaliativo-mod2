@@ -99,6 +99,31 @@
       "complemento": "",
       "referencia": "",
       "id": 5
+    },
+    {
+      "nome": "Peter Benjamin Parker",
+      "email": "peter@hero.com",
+      "genero": "m",
+      "nascimento": "2002-08-10",
+      "cpf": "987.456.654-12",
+      "estadoCivil": "solteiro",
+      "tel": "(21) 8 7666-6666",
+      "naturalidade": "new york",
+      "contatoEmergencia": "(21) 8 7777-7777",
+      "alergias": "protreina do leite",
+      "cuidados": "",
+      "convenio": "wayne health",
+      "numConvenio": "0000015",
+      "valConvenio": "2023-12-31",
+      "cep": "20030021",
+      "estado": "RJ",
+      "cidade": "Rio de Janeiro",
+      "rua": "Avenida Presidente Wilson",
+      "bairro": "Centro",
+      "numero": "1000",
+      "complemento": "",
+      "referencia": "",
+      "id": 6
     }
   ],
   "users": [
