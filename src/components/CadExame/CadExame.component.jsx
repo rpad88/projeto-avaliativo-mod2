@@ -5,6 +5,8 @@ import { AuthContext } from "../../contexts/Auth.context"
 import { CadastroService } from "../../services/Cadastro.service"
 import { ModalContext } from "../../contexts/ModalContext"
 import { PatientContext } from "../../contexts/Patient.context"
+import ModalComponent from "../Modal/Modal.component"
+import SuccessComponent from "../Success/Success.component"
 
 export default function CadExameComponent({paciente}) {
 	const {
@@ -62,7 +64,8 @@ export default function CadExameComponent({paciente}) {
 
   const handleEdit = async (data) => {
 	const newObject = { ...data, id: exam.id, IdMedico: auth.id, idPaciente: patient.id }
-	await CadastroService.EditaExame(newObject)
+	const ok = await CadastroService.EditaExame(newObject)
+	if(ok) setShow(true)
   }
 
   const handleDelete = async () => {
@@ -191,6 +194,10 @@ export default function CadExameComponent({paciente}) {
 					{errors.resultado && <small>{errors.resultado.message}</small>}
 				</Styled.InputGroup>
 			</Styled.Form>
+
+			<ModalComponent>
+				<SuccessComponent />
+			</ModalComponent>
 		</>
 	)
 }
