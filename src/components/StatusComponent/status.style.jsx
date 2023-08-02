@@ -13,6 +13,7 @@ export const StatusTitle = styled.h5`
 export const StatusWrapper = styled.div`
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 `
 export const StatusCard = styled.div`
     border: 1px solid #d3d3d3;
