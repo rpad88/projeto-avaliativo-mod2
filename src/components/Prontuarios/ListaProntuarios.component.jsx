@@ -2,10 +2,13 @@ import { useContext, useEffect, useState } from "react"
 import * as Styled from "./ListaProntuarios.style"
 import { CadastroService } from "../../services/Cadastro.service"
 import { PatientContext } from "../../contexts/Patient.context"
+import { useNavigate } from "react-router-dom"
 
 export default function ListaProntuariosComponent() {
-	const { patient, setPatient } = useContext(PatientContext)
+	const { setPatient } = useContext(PatientContext)
 	const [arrayPacientes, setArrayPacientes] = useState([])
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		async function buscaPacientes() {
@@ -16,6 +19,11 @@ export default function ListaProntuariosComponent() {
 		}
         buscaPacientes()
 	},[])
+
+	const handleDetails = (paciente) => {
+		setPatient(paciente)
+		navigate('/detalhes')
+	}
 
 	return (
 		<Styled.ProntuariosWrapper>
@@ -30,7 +38,7 @@ export default function ListaProntuariosComponent() {
 				</thead>
 				<tbody>
 					{arrayPacientes.map((p) => (
-						<Styled.Tr key={p.id} onClick={() => console.log(p.id)}>
+						<Styled.Tr key={p.id} onClick={() => handleDetails(p)}>
 							<Styled.Td>
 								<span>{p.id}</span>
 							</Styled.Td>

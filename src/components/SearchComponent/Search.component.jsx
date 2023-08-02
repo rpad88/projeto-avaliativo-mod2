@@ -32,6 +32,7 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 
 	const handlePaciente = (paciente) => {
 		setPatient(paciente)
+		setPaciente(paciente)
 		setInput("")
 		const paginaAtual = window.location.href
 		if (paginaAtual.includes("/home")) navigate("/cadPaciente")

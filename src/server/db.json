@@ -132,6 +132,17 @@
       "IdMedico": 1,
       "idPaciente": 3,
       "id": 2
+    },
+    {
+      "motivo": "Insonia",
+      "data": "2023-08-01",
+      "horario": "21:21",
+      "sintomas": "o paciente alega estar dormindo mal nas ultimas semanas",
+      "medicacao": "melatonina",
+      "dosagem": "1 comprimido todas as noites por 60 dias",
+      "IdMedico": 2,
+      "idPaciente": 2,
+      "id": 3
     }
   ],
   "exames": [

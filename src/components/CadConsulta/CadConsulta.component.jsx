@@ -6,8 +6,14 @@ import { AuthContext } from "../../contexts/Auth.context"
 import { ModalContext } from "../../contexts/ModalContext"
 import * as Styled from "../../styles/Form.style"
 import { CadastroService } from "../../services/Cadastro.service"
+import { PatientContext } from "../../contexts/Patient.context"
 
 export default function CadConsultaComponent({ paciente }) {
+	// CONTEXTS
+	const { auth } = useContext(AuthContext)
+	const { setShow } = useContext(ModalContext)
+	const { patient, consult } = useContext(PatientContext)
+
 	// REACT HOOK FORM
 	const {
 		register,
@@ -17,9 +23,6 @@ export default function CadConsultaComponent({ paciente }) {
 		formState: { errors },
 	} = useForm()
 
-	// CONTEXTS
-	const { auth } = useContext(AuthContext)
-	const { setShow } = useContext(ModalContext)
 
 	// puxa a data atual do sistema
 	const handleDate = () => {
@@ -41,6 +44,15 @@ export default function CadConsultaComponent({ paciente }) {
 	useEffect(() => {
 		handleDate()
 		handleTime()
+
+		if(consult) {
+			setValue('motivo', consult.motivo)
+			setValue('data', consult.data)
+			setValue('horario', consult.horario)
+			setValue('sintomas', consult.sintomas)
+			setValue('medicacao', consult.medicacao)
+			setValue('dosagem', consult.dosagem)
+		}
 	}, [])
 
 	const submitForm = async (data) => {
@@ -54,9 +66,9 @@ export default function CadConsultaComponent({ paciente }) {
 		<>
 			<Styled.Form onSubmit={handleSubmit(submitForm)}>
 				<Styled.Legend>
-					Consulta de{" "}
-					<span style={{ color: "rgb(56, 107, 201)" }}>
-						{paciente.nome || "..."}
+					Consulta de{' '} 
+					<span style={{ color: "rgb(56, 107, 201)" }}> 
+						{paciente.nome || patient.nome || "..."}
 					</span>
 				</Styled.Legend>
 				<Styled.InputGroup>
@@ -153,8 +165,8 @@ export default function CadConsultaComponent({ paciente }) {
 				</Styled.InputGroup>
 				<div className="actions">
 					<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
-					<Styled.BtnEditar disabled>Editar</Styled.BtnEditar>
-					<Styled.BtnDeletar disabled>Deletar</Styled.BtnDeletar>
+					<Styled.BtnEditar disabled={!consult}>Editar</Styled.BtnEditar>
+					<Styled.BtnDeletar disabled={!consult}>Deletar</Styled.BtnDeletar>
 				</div>
 			</Styled.Form>
 

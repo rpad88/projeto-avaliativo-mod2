@@ -1,13 +1,9 @@
 import { Container } from "react-bootstrap"
 import SidebarComponent from "../../../components/SidebarComponent/Sidebar.component"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { SidebarContext } from "../../../contexts/SidebarContext"
 import HeaderComponent from "../../../components/HeaderComponent/Header.component"
-import StatusComponent from "../../../components/StatusComponent/Status.component"
-import SearchComponent from "../../../components/SearchComponent/Search.component"
-import CardsContainer from "../../../components/CardPaciente/Cards.container"
-
-
+import ProntuarioDetailsComponent from "../../../components/Prontuarios/ProntuarioDetails/ProntuarioDetails.component"
 
 export default function ProntuarioDetailsPage() {
 	const { showSidebar, setShowSidebar } = useContext(SidebarContext)
@@ -29,7 +25,10 @@ export default function ProntuarioDetailsPage() {
 						handleShowSidebar={handleShowSidebar}
 						title="estatísticas e informações"
 					/>
-					Conteudo aqui
+					<Container>
+                        <ProntuarioDetailsComponent />
+                    
+                    </Container>
 				</Container>
 			</div>
 		</>
