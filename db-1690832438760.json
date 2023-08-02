@@ -99,31 +99,6 @@
       "complemento": "",
       "referencia": "",
       "id": 5
-    },
-    {
-      "nome": "Peter Benjamin Parker",
-      "email": "peter@hero.com",
-      "genero": "m",
-      "nascimento": "2002-08-10",
-      "cpf": "987.456.654-12",
-      "estadoCivil": "solteiro",
-      "tel": "(21) 8 7666-6666",
-      "naturalidade": "new york",
-      "contatoEmergencia": "(21) 8 7777-7777",
-      "alergias": "protreina do leite",
-      "cuidados": "",
-      "convenio": "wayne health",
-      "numConvenio": "0000015",
-      "valConvenio": "2023-12-31",
-      "cep": "20030021",
-      "estado": "RJ",
-      "cidade": "Rio de Janeiro",
-      "rua": "Avenida Presidente Wilson",
-      "bairro": "Centro",
-      "numero": "1000",
-      "complemento": "",
-      "referencia": "",
-      "id": 6
     }
   ],
   "users": [
@@ -157,29 +132,17 @@
       "IdMedico": 1,
       "idPaciente": 3,
       "id": 2
-    },
-    {
-      "motivo": "Insonia",
-      "data": "2023-08-01",
-      "horario": "23:41",
-      "sintomas": "o paciente alega estar dormindo mal nas ultimas semanas",
-      "medicacao": "melatonina",
-      "dosagem": "1 comprimido todas as noites por 60 dias",
-      "id": 3,
-      "IdMedico": 2,
-      "idPaciente": 2
     }
   ],
   "exames": [
     {
       "nome": "hemograma completo",
-      "data": "2023-08-01",
-      "hora": "23:57",
+      "data": "2023-07-29",
+      "hora": "16:20",
       "tipo": "sanguineo",
       "lab": "hemaclin",
-      "url": "",
       "resultado": "o exame apresentou leves alterações no colesterol",
-      "idMedico": 2,
+      "idMedico": 1,
       "idPaciente": 2,
       "id": 1
     }

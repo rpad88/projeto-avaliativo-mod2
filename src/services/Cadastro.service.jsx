@@ -44,7 +44,7 @@ const BuscaTodosPacientes = async () => {
 	}
 }
 
-// PUT
+// POST
 const CadastraPaciente = async (dadosDoForm) => {
 	try {
 		const paciente = {
@@ -70,6 +70,32 @@ const CadastraPaciente = async (dadosDoForm) => {
 	}
 }
 
+// PUT
+const EditaPaciente = async (dadosDoForm) => {
+	try {
+		const paciente = {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dadosDoForm),
+		}
+
+		const ok = await fetch(`${PACIENTES_URL}/${dadosDoForm.id}`, paciente)
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const DeletaPaciente = async (id) => {
+	try {
+		const result = await fetch(`${PACIENTES_URL}/${id}`, {method: 'DELETE'}).then(() => `Paciente ${id} deletado com sucesso.`)
+		return result
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
 // VERIFICA SE O PACIENTE JÁ EXISTE
 const PacienteExists = async (cpf) => {
 	try {
@@ -83,6 +109,7 @@ const PacienteExists = async (cpf) => {
 	}
 }
 
+//  ***** MÉDICO (LOGIN) *****
 // GET | User LOGIN
 const VerificaConta = async () => {
 	try {
@@ -94,7 +121,6 @@ const VerificaConta = async () => {
 		console.error(error.message)
 	}
 }
-// -------------------------------------
 
 // POST | Cadastro de usuário
 const CadastraUser = async (dados) => {
@@ -122,8 +148,6 @@ const CadastraUser = async (dados) => {
 	}
 }
 
-const BuscaUser = async (dados) => {}
-
 // ***** CONSULTAS *****
 const CadastraConsulta = async (dados) => {
 	try {
@@ -146,12 +170,48 @@ const CadastraConsulta = async (dados) => {
 	}
 }
 
-const BuscaTodasConsultas = async (dados) => {
+const BuscaTodasConsultas = async () => {
 	try {
 		const arrayConsultas = await fetch(CONSULTAS_URL).then((res) =>
 			res.json()
 		)
 		return arrayConsultas
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const BuscaConsultasPorPaciente = async (id) => {
+	try {
+		const arrayConsultas = await BuscaTodasConsultas()
+		const filtradas = arrayConsultas.filter(consulta => consulta.idPaciente === id)
+		return filtradas.length > 0 ? filtradas : false
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const EditaConsulta = async (dadosDoForm) => {
+	try {
+		const consulta = {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dadosDoForm),
+		}
+
+	    const ok = await fetch(`${CONSULTAS_URL}/${dadosDoForm.id}`, consulta)
+		if (ok) return console.info(`consulta ${dadosDoForm.id} editada com sucesso`)
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const DeletaConsulta = async (id) => {
+	try {
+		const result = await fetch(`${CONSULTAS_URL}/${id}`, {method: 'DELETE'}).then(() => `Consulta ${id} deletada com sucesso.`)
+		return result
 	} catch (error) {
 		console.error(error.message)
 	}
@@ -188,6 +248,42 @@ const BuscaTodosExames = async () => {
 	}
 }
 
+const BuscaExamesPorPaciente = async (id) => {
+	try {
+		const arrayExames = await BuscaTodosExames()
+		const filtradas = arrayExames.filter(exame => exame.idPaciente === id)
+		return filtradas.length > 0 ? filtradas : false
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const EditaExame = async (dados) => {
+	try {
+		const exame = {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dados),
+		}
+
+	    const ok = await fetch(`${EXAMES_URL}/${dados.id}`, exame)
+		if (ok) return console.info(`exame ${dados.id} editado com sucesso`)
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+const DeletaExame = async (id) => {
+	try {
+		const result = await fetch(`${EXAMES_URL}/${id}`, {method: 'DELETE'}).then(() => `Exame ${id} deletado com sucesso.`)
+		return result
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
 export const CadastroService = {
 	GetEndereco,
 	CadastraPaciente,
@@ -199,4 +295,12 @@ export const CadastroService = {
 	BuscaTodasConsultas,
 	CadastraExame,
 	BuscaTodosExames,
+	EditaPaciente,
+	DeletaPaciente,
+	BuscaConsultasPorPaciente,
+	BuscaExamesPorPaciente,
+	EditaConsulta,
+	DeletaConsulta,
+	EditaExame,
+	DeletaExame,
 }

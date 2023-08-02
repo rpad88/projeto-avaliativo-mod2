@@ -4,6 +4,8 @@ import CadPacientePage from '../pages/CadPaciente/CadPaciente.page'
 import LoginPage from '../pages/Login/LoginPage'
 import CadConsultaPage from '../pages/CadConsulta/CadConsulta.page'
 import CadExamePage from '../pages/CadExame/CadExame.page'
+import ProntuariosPage from '../pages/Prontuarios/ListaProntuarios.page'
+import ProntuarioDetailsPage from '../pages/Prontuarios/Details/ProntuarioDetails.page'
 
 export default function PrivateRoutes() {
   return (
@@ -13,6 +15,8 @@ export default function PrivateRoutes() {
           <Route path='/cadPaciente' element={<CadPacientePage/>} />
           <Route path='/cadConsulta' element={<CadConsultaPage />} />
           <Route path='/cadExame' element={<CadExamePage />} />
+          <Route path='/prontuarios' element={<ProntuariosPage />} />
+          <Route path='/detalhes' element={<ProntuarioDetailsPage />} />
           <Route path='/home' element={<HomePage/>} />
         </Routes>
       </Router>

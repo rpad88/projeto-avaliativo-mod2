@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react"
 import { AuthContext } from "../../contexts/Auth.context"
 import { CadastroService } from "../../services/Cadastro.service"
 import { ModalContext } from "../../contexts/ModalContext"
+import { PatientContext } from "../../contexts/Patient.context"
 
 export default function CadExameComponent({paciente}) {
 	const {
@@ -17,6 +18,7 @@ export default function CadExameComponent({paciente}) {
 	// contexts
 	const { auth } = useContext(AuthContext)
 	const { setShow } = useContext(ModalContext)
+	const { exam, patient } = useContext(PatientContext)
 
 	// puxa a data atual do sistema
 	const handleDate = () => {
@@ -38,13 +40,34 @@ export default function CadExameComponent({paciente}) {
 	useEffect(() => {
 		handleDate()
 		handleTime()
+
+		if(exam) {
+			console.log(exam)
+			setValue('nome', exam.nome)
+			setValue('data', exam.data)
+			setValue('hora', exam.hora)
+			setValue('tipo', exam.tipo)
+			setValue('lab', exam.lab)
+			setValue('resultado', exam.resultado)
+			if(exam.url) setValue('url', exam.url)
+		}
 	}, [])
 
   const submitForm = async (data) => {
-    	const newObj = {...data, idMedico: auth.id, idPaciente: paciente.id}
+    	const newObj = {...data, idMedico: auth.id, idPaciente: paciente.id || patient.id}
 		const ok = await CadastroService.CadastraExame(newObj)
 		if(ok) setShow(true)
 		reset()
+  }
+
+  const handleEdit = async (data) => {
+	const newObject = { ...data, id: exam.id, IdMedico: auth.id, idPaciente: patient.id }
+	await CadastroService.EditaExame(newObject)
+  }
+
+  const handleDelete = async () => {
+		const ok = await CadastroService.DeletaExame(exam.id)
+		if(ok) setShow(true)
   }
 
 	return (
@@ -59,12 +82,12 @@ export default function CadExameComponent({paciente}) {
 					}}
 				>
 					<Styled.Legend style={{ textAlign: "initial" }}>
-						exame de <span style={{color: 'rgb(56, 107, 201)'}}>{paciente.nome || '...'}</span>
+						exame de <span style={{color: 'rgb(56, 107, 201)'}}>{paciente && paciente.nome || patient && patient.nome || '...'}</span>
 					</Styled.Legend>
 					<div style={{ display: "flex", gap: ".5rem" }}>
-						<Styled.BtnEditar disabled>Editar</Styled.BtnEditar>
-						<Styled.BtnDeletar disabled>Deletar</Styled.BtnDeletar>
 						<Styled.BtnSalvar type="submit">Salvar</Styled.BtnSalvar>
+						<Styled.BtnEditar disabled={!exam} onClick={handleSubmit(handleEdit)}>Editar</Styled.BtnEditar>
+						<Styled.BtnDeletar disabled={!exam} onClick={handleSubmit(handleDelete)}>Deletar</Styled.BtnDeletar>
 					</div>
 				</div>
 
@@ -145,6 +168,7 @@ export default function CadExameComponent({paciente}) {
 					<Styled.Input
 						name="url"
 						type="url"
+						{...register('url')}
 						placeholder="http://exemplo.com"
 						pattern="https://.*"
 					/>

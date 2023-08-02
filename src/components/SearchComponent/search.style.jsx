@@ -46,7 +46,7 @@ export const SearchBtn = styled.button`
 	}
 `
 
-export const Ul = styled.ul`
+export const Table = styled.table`
 	width: 90%;
 	padding: 1rem;
 	background-color: #fefefe;
@@ -57,11 +57,12 @@ export const Ul = styled.ul`
 	border: 1px solid #d3d3d3;
 	z-index: 1;
 	
-	li {
-		color: #000;
-		border-radius: 5px;
-		padding: 5px;
+	th, td {
+		border: 1px solid #d3d3d3;
+		padding-left: 5px;
+	}
 
+	tr {
 		&:hover {
 			background-color: #d3d3d3;
 			cursor: pointer;

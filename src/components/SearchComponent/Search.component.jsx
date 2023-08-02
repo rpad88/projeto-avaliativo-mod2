@@ -1,20 +1,15 @@
 import { IoSearchOutline } from "react-icons/io5"
 import * as Styled from "./search.style"
-import { useEffect, useState } from "react"
-import { CadastroService } from "../../services/Cadastro.service"
+import { useContext, useState } from "react"
+import { PatientContext } from "../../contexts/Patient.context"
+import { useNavigate } from "react-router-dom"
 
 export default function SearchComponent({ title, placeholder, setPaciente }) {
-	// const [arrayPacientes, setArrayPacientes] = useState("")
 	const [input, setInput] = useState("")
 	const [results, setResults] = useState([])
 
-	// useEffect(() => {
-	// 	async function pegaPacientes() {
-	// 		const array = await CadastroService.BuscaTodosPacientes()
-	// 		setArrayPacientes(array)
-	// 	}
-	// 	pegaPacientes()
-	// })
+	const { setPatient } = useContext(PatientContext)
+	const navigate = useNavigate()
 
 	const handleSearch = (value) => {
 		fetch("http://localhost:3000/pacientes")
@@ -22,23 +17,29 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 			.then((json) => {
 				const res = json.filter((paciente) => {
 					return (
-						value &&
-						paciente.nome.toLowerCase().includes(value) || paciente.id == value
+						(value && paciente.nome.toLowerCase().includes(value)) ||
+						paciente.id == value
 					)
 				})
 				setResults(res)
-				console.log(res)
 			})
 	}
 
 	const handleChange = (value) => {
 		handleSearch(value)
-		setInput(value)
+		setInput(value) // Input é importante para mostrar a busca dinâmica
 	}
 
 	const handlePaciente = (paciente) => {
+		setPatient(paciente)
 		setPaciente(paciente)
-		setInput('')
+		setInput("")
+		const paginaAtual = window.location.href
+		if (paginaAtual.includes("/home")) navigate("/cadPaciente")
+	}
+
+	const formataData = (data) => {
+		return new Date(data).toLocaleDateString('pt-BR', {timeZone: 'UTC'})
 	}
 
 	return (
@@ -62,13 +63,26 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 					</Styled.SearchBtn>
 				</Styled.Search>
 				{input && (
-					<Styled.Ul>
-						{
-							results.map((p) => {
-								return <li onClick={() =>handlePaciente(p)} key={p.id}>{p.nome}</li>
-							})
-						}
-					</Styled.Ul>
+					<Styled.Table>
+						<thead style={{color: '#525252'}}>
+							<tr>
+								<th>Id</th>
+								<th>Nome</th>
+								<th>Data Nascimento</th>
+							</tr>
+						</thead>
+						<tbody>
+							{results.map((p) => {
+								return (
+									<tr key={p.id} onClick={() => handlePaciente(p)}>
+										<td>{p.id}</td>
+										<td>{p.nome}</td>
+										<td>{formataData(p.nascimento)}</td>
+									</tr>
+								)
+							})}
+						</tbody>
+					</Styled.Table>
 				)}
 			</Styled.SearchContainer>
 		</>

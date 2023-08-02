@@ -6,6 +6,7 @@ import { GlobalStyle } from "./global.style.jsx"
 import { ModalProvider } from "./contexts/ModalContext.jsx"
 import { AuthProvider } from "./contexts/Auth.context.jsx"
 import { SidebarProvider } from "./contexts/SidebarContext.jsx"
+import { PatientProvider } from "./contexts/Patient.context.jsx"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 			<GlobalStyle />
 			<AuthProvider>
 				<SidebarProvider>
-					<App />
+					<PatientProvider>
+						<App />
+					</PatientProvider>
 				</SidebarProvider>
 			</AuthProvider>
 		</ModalProvider>
