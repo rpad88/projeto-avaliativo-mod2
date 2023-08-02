@@ -6,6 +6,7 @@ import ListaConsultasComponent from "../ListaConsultas/ListaConsultas.component"
 export default function ProntuarioDetailsComponent() {
 	const { patient } = useContext(PatientContext)
 
+  // não utilizado por causa do react-input-mask
     const formataTel = (tel) => {
         const telFormatado = tel
                             .replace(/(..)(.)(....)(....)/ //-> o ponto significa qualquer caracter | os () separam em 4 grupos
