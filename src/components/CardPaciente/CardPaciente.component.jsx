@@ -24,7 +24,7 @@ export default function CardPacienteComponent({paciente}) {
 
     const formataTel = () => {
         const telFormatado = paciente.tel
-                            .replace(/(..)(.)(....)(....)/ //-> o ponto significa qualquer caracter | os () separam em 4 grupos
+                            .replace(/([0-9]{2})([0-9]{1})([0-9]{4})([0-9]{4})/ //[0 a 9]{2 dígitos}
                             , '($1) $2 $3-$4') //aqui faz a formatação através dos grupos
         return telFormatado
     }
