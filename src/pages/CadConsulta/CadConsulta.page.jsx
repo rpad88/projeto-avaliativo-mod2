@@ -32,9 +32,8 @@ export default function CadConsultaPage() {
 						<SearchComponent
 							title="encontre o paciente"
 							placeholder="Digite o nome do paciente"
-							setPaciente={setPaciente}
 						/>
-						<CadConsultaComponent paciente={paciente} />
+						<CadConsultaComponent/>
 					</Container>
 				</Container>
 			</PacienteContainer>
