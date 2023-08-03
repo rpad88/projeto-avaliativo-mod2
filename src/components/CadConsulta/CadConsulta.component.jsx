@@ -66,7 +66,7 @@ export default function CadConsultaComponent({ paciente }) {
 	}, [])
 
 	const submitForm = async (data) => {
-		const newObject = { ...data, IdMedico: auth.id, idPaciente: paciente.id }
+		const newObject = { ...data, IdMedico: auth.id, idPaciente: patient.id }
 		const ok = await CadastroService.CadastraConsulta(newObject)
 		if (ok) setShow(true)
 		reset()
