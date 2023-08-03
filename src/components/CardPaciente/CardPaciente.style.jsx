@@ -8,7 +8,8 @@ export const CardContainer = styled.div`
 `
 
 export const Card = styled.div`
-	flex: 0 1 32.5%;
+	flex: 1 1 20em;
+    max-width: 30em;
 	border-radius: 1rem;
 	border: 1px solid #d3d3d3;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);

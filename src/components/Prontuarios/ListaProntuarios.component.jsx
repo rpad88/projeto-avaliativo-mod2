@@ -25,6 +25,10 @@ export default function ListaProntuariosComponent() {
 		navigate('/detalhes')
 	}
 
+	const formataData = (data) => {
+		return new Date(data).toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+	}
+
 	return (
 		<Styled.ProntuariosWrapper>
 			<Styled.Table>
@@ -46,7 +50,7 @@ export default function ListaProntuariosComponent() {
 								<span>{p.nome}</span>
 							</Styled.Td>
 							<Styled.Td>
-								<span>{p.nascimento}</span>
+								<span>{formataData(p.nascimento)}</span>
 							</Styled.Td>
 							<Styled.Td>
 								<span>{p.convenio || 'Particular'}</span>

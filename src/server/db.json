@@ -12,7 +12,7 @@
       "contatoEmergencia": "65912345678",
       "alergias": "",
       "cuidados": "",
-      "convenio": "",
+      "convenio": "wayne health",
       "numConvenio": "",
       "valConvenio": "",
       "cep": "78030030",
@@ -182,6 +182,42 @@
       "idMedico": 2,
       "idPaciente": 2,
       "id": 1
+    },
+    {
+      "nome": "ureia",
+      "data": "2023-08-02",
+      "hora": "19:11",
+      "tipo": "sanguineo",
+      "lab": "hematoclin",
+      "url": "",
+      "resultado": "resultado dentro dos padrões",
+      "id": 2,
+      "IdMedico": 2,
+      "idPaciente": 2
+    },
+    {
+      "nome": "creatinina",
+      "data": "2023-08-02",
+      "hora": "19:12",
+      "tipo": "sanguineo",
+      "lab": "hematoclin",
+      "url": "",
+      "resultado": "apresentou leve alteração acima do limite",
+      "idMedico": 2,
+      "idPaciente": 2,
+      "id": 3
+    },
+    {
+      "nome": "ureia",
+      "data": "2023-08-02",
+      "hora": "19:11",
+      "tipo": "urina",
+      "lab": "hematoclin",
+      "url": "",
+      "resultado": "resultado dentro dos padrões",
+      "idMedico": 2,
+      "idPaciente": 2,
+      "id": 4
     }
   ]
 }

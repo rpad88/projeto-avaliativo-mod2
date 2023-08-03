@@ -269,7 +269,7 @@ const EditaExame = async (dados) => {
 		}
 
 	    const ok = await fetch(`${EXAMES_URL}/${dados.id}`, exame)
-		if (ok) return console.info(`exame ${dados.id} editado com sucesso`)
+		if (ok) return true
 	} catch (error) {
 		console.error(error.message)
 	}
