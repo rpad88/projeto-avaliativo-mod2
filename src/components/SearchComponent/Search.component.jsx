@@ -35,6 +35,7 @@ export default function SearchComponent({ title, placeholder, setPaciente }) {
 		setInput("")
 		const paginaAtual = window.location.href
 		if (paginaAtual.includes("/home")) navigate("/cadPaciente")
+		if (paginaAtual.includes("/prontuarios")) navigate("/detalhes")
 	}
 
 	const formataData = (data) => {
